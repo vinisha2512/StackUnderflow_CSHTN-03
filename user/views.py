@@ -12,3 +12,4 @@ config = {
     "appId": os.getenv("appId"),
     "measurementId": os.getenv("measurementId"),
 }
+
