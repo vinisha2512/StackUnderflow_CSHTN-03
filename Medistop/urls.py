@@ -15,8 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
+from django.conf.urls.static import static
+from django.conf import settings
+from django.conf.urls import url
+from django.urls import include, path
+
 from user import views as user_views
+from payment import views as payment_views
+from prescription import views as presc_views
+from shipment import views as shipment_views
+from administrator import views as admin_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #url('nameforurl', user_views.views_function, name='nameforurl'),
 ]
