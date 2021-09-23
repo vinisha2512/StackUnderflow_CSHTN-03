@@ -15,10 +15,31 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
+from django.conf.urls.static import static
+from django.conf import settings
+from django.conf.urls import url
+from django.urls import include, path
+
 from user import views as user_views
+from payment import views as payment_views
+from prescription import views as presc_views
+from shipment import views as shipment_views
+from administrator import views as admin_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', user_views.xyz, name="xyz"),
     path('retprod/', user_views.retprod, name="retprod"),
+    url('login', user_views.login, name='login'),
+
+    url('signup', user_views.signup, name='signup'),
+    url('reset', user_views.reset, name='reset'),
+
+    url('upload_pres', presc_views.read_presc, name='upload_pres'),
+    url(r'^user/trial/$',presc_views.f1),
+    url(r'^', user_views.homepage, name="homepage"),
+
+    #url('nameforurl', user_views.views_function, name='nameforurl'),
 ]
