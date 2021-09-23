@@ -26,7 +26,7 @@ storage = firebase.storage()
 
 
 def homepage(request):
-    return render(request, "trial.html")
+    return render(request, "homepage.html")
 
 
 def login(request):
@@ -92,4 +92,8 @@ def reset(request):
     email = request.POST.get("email")
     authe.send_password_reset_email(email)
     return render(request, "login.html")
+
+
+
+
 

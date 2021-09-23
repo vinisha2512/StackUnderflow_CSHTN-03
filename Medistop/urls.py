@@ -30,5 +30,18 @@ from administrator import views as admin_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("prescriptionverify", admin_views.prescriptionVerif, name="PrescriptionVerification"),
+    path("verify", admin_views.verify, name="Verify"),
+    path("reject", admin_views.reject, name="reject"),
+
+    url('login', user_views.login, name='login'),
+
+    url('signup', user_views.signup, name='signup'),
+    url('reset', user_views.reset, name='reset'),
+
+    url('upload_pres', presc_views.read_presc, name='upload_pres'),
+    url(r'^user/trial/$',presc_views.f1),
+    url(r'^', user_views.homepage, name="homepage"),
+
     #url('nameforurl', user_views.views_function, name='nameforurl'),
 ]
