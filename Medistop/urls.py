@@ -30,5 +30,14 @@ from administrator import views as admin_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url('login', user_views.login, name='login'),
+
+    url('signup', user_views.signup, name='signup'),
+    url('reset', user_views.reset, name='reset'),
+
+    url('upload_pres', presc_views.read_presc, name='upload_pres'),
+    url(r'^user/trial/$',presc_views.f1),
+    url(r'^', user_views.homepage, name="homepage"),
+
     #url('nameforurl', user_views.views_function, name='nameforurl'),
 ]
