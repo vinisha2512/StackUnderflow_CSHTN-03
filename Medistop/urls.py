@@ -19,4 +19,6 @@ from user import views as user_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', user_views.xyz, name="xyz"),
+    path('retprod/', user_views.retprod, name="retprod"),
 ]
