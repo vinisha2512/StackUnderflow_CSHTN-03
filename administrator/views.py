@@ -100,7 +100,7 @@ def prescriptionVerif(request):
 def verify(request):
     oid = request.POST.get("order_id")
     pno = request.POST.get("phone")
-    pli = request.POST.get("plink")
+    pli = request.POST.get("link1")
     nam = request.POST.get("name")
 
     foruid = database.child("AdminV").child("UnVeri").child(oid).get()
@@ -108,13 +108,24 @@ def verify(request):
 
     Ud = database.child("Users").child(UID).child("Orders").child(oid).child("Details").get()
     email1 = Ud.val().get("Email")
+    dict1 = {"data": "x", "data2": ["1", "2", "3"], "data3": 5}
+    pdf = render_to_pdf('invoice.html', dict1)
+    ref = storage.child("Invoice").child(UID+"_"+oid).put("prescription.pdf")
+    downloadurl = storage.child("Invoice").child(UID+"_"+oid).get_url(None)
     d = {
         "Name": nam,
         "Phone": pno,
-        "UID": "UID",
-        "PresciptionLink": pli,
+        "UID": UID,
+        "PrescriptionLink": pli,
+    }
+    e={
+       
+        "UID": UID,
+        "InvoiceLink": downloadurl,
     }
     database.child("AdminV").child("PrescVerified").child(oid).set(d)
+    database.child("AdminV").child("Veri").child(oid).set(e)
+
     database.child("AdminV").child("UnVeri").child(oid).remove()
     scan = {
         "Scan": 1
@@ -139,8 +150,7 @@ def verify(request):
                                      to=[email1, ], body=html_body)
         msg.attach_alternative(html_body, "text/html")
         msg.send()
-        dict1 = {"data": "x", "data2": ["1", "2", "3"], "data3": 5}
-        pdf = render_to_pdf('invoice.html', dict1)
+        
     except Exception as e:
         print("abcd", e)
 
@@ -195,12 +205,26 @@ def ShipmentPageData():
             UID = body.get("UID")
             print(UID)
             link = body.get("InvoiceLink")
-            Userdets = database.child("Users").child(
-                UID).child("Orders").child(OrderId).child("Details").get()
+            Userdets = database.child("Users").child(UID).child("Orders").child(OrderId).child("Details").get()
+                
             print(Userdets)
             Name = Userdets.val().get("Name")
+            print(Name)
             Phone = Userdets.val().get("Phone")
-            if (Userdets.val().get("Scan")==3):
+            print(Phone)
+            if (Userdets.val().get("Scan")>=3):
+                z=dict(database.child("Users").child(UID).child("Orders").child(OrderId).child("Content").get().val())
+                z1=dict(database.child("Users").child(UID).child("Orders").child(OrderId).child("Details").get().val())
+                print(z)
+                s=z1.get("Scan")
+                d=z1.get("Date")
+                inlink={"Url":link}
+
+                database.child("Users").child(UID).child("Past").child(d).child("Medicines").set(z)
+                database.child("Users").child(UID).child("Past").child(d).child("Invoice").set(inlink)
+
+
+                database.child("Users").child(UID).child("Orders").child(OrderId).remove()
                 continue
             name.append(Name)
             orderid.append(OrderId)
@@ -214,7 +238,12 @@ def ShipmentPageData():
         # History data fetch
 
     except:
-        return []
+        if name and orderid and phone and ilink != []:
+            combilis = zip(name, orderid, phone, ilink)
+            return combilis
+        else:
+
+            return []
 
     
     
@@ -235,7 +264,7 @@ def read_qr(request):
             y=x.val().get("UID")
             il=x.val().get("InvoiceLink")
             print(y)
-            z=dict(database.child("Users").child(y).child("Orders").child(order_id).child("content").get().val())
+            z=dict(database.child("Users").child(y).child("Orders").child(order_id).child("Content").get().val())
             z1=dict(database.child("Users").child(y).child("Orders").child(order_id).child("Details").get().val())
             print(z)
             s=z1.get("Scan")
@@ -246,8 +275,8 @@ def read_qr(request):
                 s=3
                 inlink={"Url":il}
 
-                database.child("Users").child(y).child("PastOrders").child(d).child("Medicines").set(z)
-                database.child("Users").child(y).child("PastOrders").child(d).child("Invoice").set(inlink)
+                database.child("Users").child(y).child("Past").child(d).child("Content").set(z)
+                database.child("Users").child(y).child("Past").child(d).child("Invoice").set(inlink)
 
 
                 database.child("Users").child(y).child("Orders").child(order_id).remove()

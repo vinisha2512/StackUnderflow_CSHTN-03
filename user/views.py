@@ -185,9 +185,55 @@ def addtocart(request):
 
 
 def orderhistory(request):
-    uid = request.session["uid"]
-    data = database.child("Users").child(uid).child("Orders").child("Content").get().val()
-    return render(request,"pastOrders.html")
+    try:
+        uid = request.session["uid"]
+        data = database.child("Users").child(uid).child("Orders").get()
+        orderid=[]
+        com=[]
+        for dets in data.each():
+            OrderId = dets.key()
+            orderid.append(OrderId)
+            data1 = database.child("Users").child(uid).child("Orders").child(OrderId).child("Content").get()
+            medname=[]
+            p=[]
+            selltype=[]
+            for dets1 in data1.each():
+                medname.append(dets1.key())
+                p.append(dets1.val().get("price"))
+                selltype.append(dets1.val().get("sell_type"))
+            print(orderid,medname,p,selltype)
+            combi = zip(medname,p,selltype)
+            com.append(combi)
+            coms=zip(orderid,com)
+
+        pdata = database.child("Users").child(uid).child("Past").get()
+        pid=[]
+        pcom=[]
+        for pdets in pdata.each():
+            pId = pdets.key()
+            
+            pdata1 = database.child("Users").child(uid).child("Past").child(pId).child("Content").get()
+
+            pid.append(database.child("Users").child(uid).child("Past").child(pId).child("Invoice").get().val().get("Url"))
+            medname=[]
+            p=[]
+            selltype=[]
+            for pdets1 in pdata1.each():
+                medname.append(pdets1.key())
+                p.append(pdets1.val().get("price"))
+                selltype.append(pdets1.val().get("sell_type"))
+            print(pid,medname,p,selltype)
+            pcombi = zip(medname,p,selltype)
+            pcom.append(pcombi)
+            pcoms=zip(pid,pcom)
+    except:
+        return render(request,"pastOrders.html")
+
+
+    
+    print(orderid)
+    print(com)
+    return render(request,"pastOrders.html",{"data1":pcoms,"data2":coms})
 
 
 

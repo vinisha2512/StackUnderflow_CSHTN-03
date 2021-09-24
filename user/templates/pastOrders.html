@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{%load static%}
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -11,7 +12,7 @@
       integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="pastOrders.css" />
+    <link rel="stylesheet" href="{%static 'css/pastOrders.css'%}" />
     <title>MediStop</title>
   </head>
   <style>
@@ -149,97 +150,81 @@
       </div>
     </nav>
 
+    {% for i,j in data2%}
     <div class="row mt-5">
       <div class="col-md-6">
         <h2 class="list-title">Current Order</h2>
       </div>
       <div class="col-md-6">
-        <button class="btn float-end me-3">Details</button>
+        <a href="#"><button class="btn float-end me-3">Details</button></a>
       </div>
     </div>
+    
     <div
       class="card bg-light border-bottom border-top border-4 pb-4 pt-2"
       id="list1"
     >
       <div class="row">
+        {%for medname,p,selltype in j%}
         <div class="col-md-3 py-2">
           <div class="card">
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>{{medname}}</h6>
+              <p class="card-text">{{selltype}}</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹{{p}}</h5>
             </div>
           </div>
         </div>
-        <div class="col-md-3 py-2">
-          <div class="card">
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 py-2">
-          <div class="card">
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 py-2">
-          <div class="card">
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 py-2">
-          <div class="card">
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 py-2">
-          <div class="card">
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
+        {%endfor%}
       </div>
     </div>
+    {%endfor%}
 
+
+    {% for i,j in data1%}
     <div class="row mt-5">
+      <div class="col-md-6">
+        <h2 class="list-title">Past Order</h2>
+      </div>
+      <div class="col-md-6">
+        <a href="{{i}}"><button class="btn float-end me-3">Invoice</button></a>
+      </div>
+    </div>
+    
+    <div
+      class="card bg-light border-bottom border-top border-4 pb-4 pt-2"
+      id="list1"
+    >
+      <div class="row">
+        {%for medname,p,selltype in j%}
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>{{medname}}</h6>
+              <p class="card-text">{{selltype}}</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹{{p}}</h5>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </div>
+    {%endfor%}
+
+
+    <!-- <div class="row mt-5">
       <div class="col-md-6">
         <h2 class="list-title">Past Order</h2>
       </div>
       <div class="col-md-6">
         <button class="btn float-end me-3">Invoice</button>
       </div>
-    </div>
-    <div
+    </div> -->
+    <!-- <div
       class="card bg-light border-bottom border-top border-4 pb-4 pt-2"
       id="list1"
     >
@@ -302,7 +287,7 @@
         <div class="col-md-3 py-2">
           <div class="card">
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <h6>Clobetamil G Cream</h6>
               <p class="card-text">Bottle of 60 capsules</p>
             </div>
             <div class="card-footer">
@@ -311,7 +296,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!--------FOOTERRR--------->
     <footer class="text-center text-lg-start bg-light text-muted bg-dark mt-4">
