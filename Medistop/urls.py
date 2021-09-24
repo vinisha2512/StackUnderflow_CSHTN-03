@@ -43,14 +43,14 @@ urlpatterns = [
 
 
    
-
+    path('orderhistory',user_views.orderhistory,name="orderhistory"),
     path('', user_views.homepage, name="homepage"),
     path('retprod/', user_views.retprod, name="retprod"),
     path('login/', user_views.login, name='login'),
     path('signup/', user_views.signup, name='signup'),
     path('reset', user_views.reset, name='reset'),
     path('upload_prescription', presc_views.upload, name="upload"),
-    path('prescriptionUpload', presc_views.prescriptionUpload, name="prescriptionUpload"),
+    # path('prescriptionUpload', presc_views.prescriptionUpload, name="prescriptionUpload"),
     path('uploaded_meds', presc_views.read_presc, name='upload_pres'),
     path("cart", presc_views.cart, name="cart"),
     path('placeOrder', presc_views.placeOrder, name="placeOrder"),

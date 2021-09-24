@@ -87,7 +87,7 @@ def signup(request):
 
             request.session['uid']=uid
             request.session['loggedin'] = True
-            database.child("Users").child(uid).child("Details").child("1").set(data)
+            database.child("Users").child(uid).child("Details").set(data)
             return render(request,"Home.html")       
         except:
             message = "Unsuccessful in signing up, try again"
@@ -179,3 +179,15 @@ def addtocart(request):
     temp=int(dict(database.child("Medicine").child(medname).get().val())["Temp"])
     qty_left=min(qty_left-temp,5)
     return HttpResponse(qty_left)
+
+
+
+
+
+def orderhistory(request):
+    uid = request.session["uid"]
+    data = database.child("Users").child(uid).child("Orders").child("Content").get().val()
+    return render(request,"pastOrders.html")
+
+
+

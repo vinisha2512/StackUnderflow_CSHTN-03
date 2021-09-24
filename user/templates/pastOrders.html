@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="medicine1.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="pastOrders.css" />
+    <title>MediStop</title>
+  </head>
+  <style>
+    div.dropdown-multicol {
+      width: 30em;
+    }
+    div.dropdown-row > a.dropdown-item {
+      display: inline-block;
+      width: 20%;
+    }
+    .navbar-nav .dropdown-menu {
+      width: 754px;
+    }
+  </style>
+
+  <body>
+    <!--------NAVBAR STARTS--------->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+      <div class="container-fluid ms-5">
+        <a class="navbar-brand fw-bold me-5" href="#">
+          <img src="Logo1.png" alt="" style="height: 35px; width: 102px" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="color: cyan; font-weight: 600"
+              >
+                MEDICINES
+              </a>
+              <div
+                class="dropdown-menu dropdown-multicol"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">DERMA</a>
+                  <a class="dropdown-item" href="#">RESPIRATORY</a>
+                  <a class="dropdown-item ps-5" href="#">ANTI INFECTIVES</a>
+                </div>
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">UROLOGY</a>
+                  <a class="dropdown-item" href="#">ANTI DIABETIC</a>
+
+                  <a class="dropdown-item ps-5" href="#"
+                    >VITAMINS MINERALS NUTRIENTS</a
+                  >
+                </div>
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">CARDIAC</a>
+                  <a class="dropdown-item" href="#">STOMATOLOGICALS</a>
+                  <a class="dropdown-item ps-5" href="#">GASTRO INTESTINAL</a>
+                </div>
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">HORMONES</a>
+                  <a class="dropdown-item" href="#">BLOOD RELATED</a>
+                  <a class="dropdown-item ps-5" href="#">OPHTHAL OTOLOGICALS</a>
+                </div>
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">OTOLOGICALS</a>
+                  <a class="dropdown-item" href="#">PAIN ANALGESICS</a>
+                  <a class="dropdown-item ps-5" href="#">ANTI MALARIALS</a>
+                </div>
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">VACCINES</a>
+                  <a class="dropdown-item" href="#">NEURO CNS</a>
+                  <a class="dropdown-item ps-5" href="#">ANTI NEOPLASTICS</a>
+                </div>
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">OPHTHAL</a>
+                  <a class="dropdown-item" href="#">GYNAECOLOGICAL</a>
+                  <a class="dropdown-item ps-5" href="#"
+                    >SEX STIMULANTS REJUVENATORS</a
+                  >
+                </div>
+              </div>
+            </li>
+            <form class="d-flex w-100">
+              <div class="autocomplete" style="width: 500px">
+                <input
+                  class="form-control me-2"
+                  type="text"
+                  placeholder="Search..."
+                  aria-label="Search"
+                  id="nav_search"
+                  style="width: 500px"
+                />
+                <input type="hidden" name="meds" id="meds" value="{{meds}}" />
+              </div>
+              <button class="btn btn-outline-success ms-2" type="submit">
+                Search
+              </button>
+            </form>
+          </ul>
+          <div class="d-flex me-5">
+            <button
+              class="btn me-3"
+              style="background-color: black; color: cyan; font-weight: 600"
+            >
+              Upload
+            </button>
+            <button class="btn text-light" type="btn">Logout</button>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              fill="currentColor"
+              class="bi bi-cart2 mt-1 ms-3"
+              viewBox="0 0 16 16"
+              style="color: white"
+            >
+              <path
+                d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <h2 class="list-title">Current Order</h2>
+      </div>
+      <div class="col-md-6">
+        <button class="btn float-end me-3">Details</button>
+      </div>
+    </div>
+    <div
+      class="card bg-light border-bottom border-top border-4 pb-4 pt-2"
+      id="list1"
+    >
+      <div class="row">
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <p class="card-text">Bottle of 60 capsules</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹498</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <p class="card-text">Bottle of 60 capsules</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹498</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <p class="card-text">Bottle of 60 capsules</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹498</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <p class="card-text">Bottle of 60 capsules</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹498</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <p class="card-text">Bottle of 60 capsules</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹498</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <p class="card-text">Bottle of 60 capsules</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹498</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-md-6">
+        <h2 class="list-title">Past Order</h2>
+      </div>
+      <div class="col-md-6">
+        <button class="btn float-end me-3">Invoice</button>
+      </div>
+    </div>
+    <div
+      class="card bg-light border-bottom border-top border-4 pb-4 pt-2"
+      id="list1"
+    >
+      <div class="row">
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <p class="card-text">Bottle of 60 capsules</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹498</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <p class="card-text">Bottle of 60 capsules</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹498</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <p class="card-text">Bottle of 60 capsules</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹498</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <p class="card-text">Bottle of 60 capsules</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹498</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <p class="card-text">Bottle of 60 capsules</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹498</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <p class="card-text">Bottle of 60 capsules</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹498</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--------FOOTERRR--------->
+    <footer class="text-center text-lg-start bg-light text-muted bg-dark mt-4">
+      <div
+        class="text-center p-4"
+        style="background-color: rgba(0, 0, 0, 0.05)"
+      >
+        © 2021 Copyright:
+        <a class="text-reset fw-bold text-decoration-none" href="#"
+          >MediStop.com</a
+        >
+      </div>
+    </footer>
+
+    <!-- -------------------------------------------------------------------- -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+    <script src="ModalFunc.js"></script>
+  </body>
+</html>

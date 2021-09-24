@@ -47,7 +47,7 @@ def VerifyPageData():
             print(UID)
             link = body.get("PrescriptionLink")
             Userdets = database.child("Users").child(
-                UID).child("Orders").child(OrderId).get()
+                UID).child("Orders").child(OrderId).child("Details").get()
             print(Userdets)
             Name = Userdets.val().get("Name")
             Phone = Userdets.val().get("Phone")
@@ -106,7 +106,7 @@ def verify(request):
     foruid = database.child("AdminV").child("UnVeri").child(oid).get()
     UID = foruid.val().get("UID")
 
-    Ud = database.child("Users").child(UID).child("Orders").child(oid).get()
+    Ud = database.child("Users").child(UID).child("Orders").child(oid).child("Details").get()
     email1 = Ud.val().get("Email")
     d = {
         "Name": nam,
@@ -121,7 +121,7 @@ def verify(request):
     }
     try:
         database.child("Users").child(UID).child(
-            "Orders").child(oid).update(scan)
+            "Orders").child(oid).child("Details").update(scan)
     except:
         pass
     try:
@@ -158,7 +158,7 @@ def reject(request):
     nam = request.POST.get("name1")
     foruid = database.child("AdminV").child("UnVeri").child(oid).get()
     UID = foruid.val().get("UID")
-    Ud = database.child("Users").child(UID).child("Orders").child(oid).get()
+    Ud = database.child("Users").child(UID).child("Orders").child(oid).child("Details").get()
     database.child("AdminV").child("UnVeri").child(oid).remove()
     database.child("Users").child(UID).child("Orders").child(oid).remove()
     
@@ -196,7 +196,7 @@ def ShipmentPageData():
             print(UID)
             link = body.get("InvoiceLink")
             Userdets = database.child("Users").child(
-                UID).child("Orders").child(OrderId).get()
+                UID).child("Orders").child(OrderId).child("Details").get()
             print(Userdets)
             Name = Userdets.val().get("Name")
             Phone = Userdets.val().get("Phone")
@@ -233,20 +233,28 @@ def read_qr(request):
             x=database.child("AdminV").child("Veri").child(order_id).get()
             print(x)
             y=x.val().get("UID")
+            il=x.val().get("InvoiceLink")
             print(y)
-            z=dict(database.child("Users").child(y).child("Orders").child(order_id).get().val())
+            z=dict(database.child("Users").child(y).child("Orders").child(order_id).child("content").get().val())
+            z1=dict(database.child("Users").child(y).child("Orders").child(order_id).child("Details").get().val())
             print(z)
-            s=z.get("Scan")
+            s=z1.get("Scan")
+            d=z1.get("Date")
             print(s)
             
             if s>=3:
                 s=3
-                database.child("Users").child(y).child("PastOrders").child(order_id).set(z)
-                #database.child("Users").child(y).child("Orders").child(order_id).remove()
+                inlink={"Url":il}
+
+                database.child("Users").child(y).child("PastOrders").child(d).child("Medicines").set(z)
+                database.child("Users").child(y).child("PastOrders").child(d).child("Invoice").set(inlink)
+
+
+                database.child("Users").child(y).child("Orders").child(order_id).remove()
             else:
                 s=s+1
                 scan = {"Scan": s}
-                database.child("Users").child(y).child("Orders").child(order_id).update(scan)
+                database.child("Users").child(y).child("Orders").child(order_id).child("Details").update(scan)
             print("correct")
             combilis = ShipmentPageData()
             
