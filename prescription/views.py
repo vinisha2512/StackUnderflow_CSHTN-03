@@ -240,8 +240,8 @@ def read_presc(request):
         delete = default_storage.delete(imagename)
         delete = default_storage.delete(cropped_name)
         combilis = zip(medi, sell_type, price, qty, lqty)
-        cart_dct = {"medi": medi, "sell_type": sell_type, "price": price, "qty":qty}
-        request.session["cart"] = cart_dct
+        # cart_dct = {"medi": medi, "sell_type": sell_type, "price": price, "qty":qty}
+        # request.session["cart"] = cart_dct
         presc_link = storage.child("Prescripton").child(request.session["uid"]).get_url(None)
         return render(request,'cart.html',{"data":combilis, "presc_link": presc_link})
     return render(request,'upload-prescription.html')
@@ -293,8 +293,6 @@ def placeOrder(request):
         # print(name, address, phoneNo, mode, presc_req)
         if mode=="manual":
             if (presc_req):
-                file = request.FILES['FileUpload']
-                print(file)
                 cart = dict(database.child("Users").child(request.session["uid"]).child("Cart").child().get().val())
                 print(cart)
                 data = {"Address":address, "Name":name, "FileLink": "None","Payment": "COD", "Status": "Not Verified", "Phone": phoneNo, "Scan": 0, "Total": total, "Email": email, "Date": d1}
