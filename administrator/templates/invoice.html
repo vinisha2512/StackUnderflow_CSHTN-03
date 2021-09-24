@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title> </title>
+    <style>
+      @page {
+        background-image: url('https://firebasestorage.googleapis.com/v0/b/medistop-c7db0.appspot.com/o/pdf-01.png?alt=media&token=ddf709dd-7517-47b3-b525-41942804722f');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+        size: a4 portrait;
+        @frame header_frame {
+          /* Static Frame */
+          -pdf-frame-content: header_content;
+          left: 50pt;
+          width: 512pt;
+          top: 20pt;
+          height: 70pt;
+        }
+        @frame content_frame {
+          /* Content Frame */
+          left: 50pt;
+          width: 512pt;
+          top: 90pt;
+          height: 632pt;
+        }
+        @frame footer_frame {
+          /* Another static Frame */
+          -pdf-frame-content: footer_content;
+          left: 50pt;
+          width: 512pt;
+          top: 750pt;
+          height: 100pt;
+        }
+      }
+
+      body{
+        font-family: "Courier";
+        
+      }
+
+      table { -pdf-keep-with-next: true; }
+      p { margin: 0; -pdf-keep-with-next: true; }
+
+      p {
+        font-family: "Courier";
+        margin: -10px;
+      }
+      label {
+        color: grey;
+        font-size: 35px;
+      }
+
+      .patientdet {
+        margin-left: 10px;
+        font-size: 20px;
+      }
+
+      .hosp {
+        font-size: 25px;
+        text-align: center;
+      }
+      
+    </style>
+  </head>
+  <body style="background-image: url('https://firebasestorage.googleapis.com/v0/b/medistop-c7db0.appspot.com/o/mail2-01.png?alt=media&token=d2bb0b52-081e-452d-b84d-804a625645f7');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;">
+    <div id="header_content">
+      <table border="none">
+      <tr style="font-size:17px">
+        <th style="text-align:left">Tax Invoice/Bill of Supply/Cash Memo</th>
+        <th style="text-align:left; padding-left: 50px">Invoice No. : <br> Date : <br> Order Id: </th>
+      </tr>
+      </table>
+    </div>
+
+
+  <br>
+  <br>
+  <br>
+    <table style="border: 1px solid black; padding: 10px; font-size: 15px">
+      <tr>
+        <td rowspan="2"> <b>Sold by:</b> <br> gibberish pffftttt <br> imma already done <br> *sighssssssss*</td>
+        <td>Patient details <br> Address <br> Contact</td>
+      </tr>
+      <tr>
+        <td>Doctor Name and address</td>
+      </tr>
+  </table>
+
+
+  <table style="border: 1px solid black; padding: 10px; font-size: 15px">
+      <tr>
+        <td rowspan="2"> <b>Sold by:</b> <br> gibberish pffftttt <br> imma already done <br> *sighssssssss*</td>
+        <td>Patient details <br> Address <br> Contact</td>
+      </tr>
+      <tr>
+        <td>Doctor Name and address</td>
+      </tr>
+  </table>
+  <table style="border: 1px solid black; padding: 10px; font-size: 15px">
+      <tr>
+        <td rowspan="2"> <b>Sold by:</b> <br> gibberish pffftttt <br> imma already done <br> *sighssssssss*</td>
+        <td>Patient details <br> Address <br> Contact</td>
+      </tr>
+      <tr>
+        <td>Doctor Name and address</td>
+      </tr>
+  </table>
+  <table style="border: 1px solid black; padding: 10px; font-size: 15px">
+      <tr>
+        <td rowspan="2"> <b>Sold by:</b> <br> gibberish pffftttt <br> imma already done <br> *sighssssssss*</td>
+        <td>Patient details <br> Address <br> Contact</td>
+      </tr>
+      <tr>
+        <td>Doctor Name and address</td>
+      </tr>
+  </table>
+  <table style="border: 1px solid black; padding: 10px; font-size: 15px">
+      <tr>
+        <td rowspan="2"> <b>Sold by:</b> <br> gibberish pffftttt <br> imma already done <br> *sighssssssss*</td>
+        <td>Patient details <br> Address <br> Contact</td>
+      </tr>
+      <tr>
+        <td>Doctor Name and address</td>
+      </tr>
+  </table>
+
+
+
+
+  <br>
+  <br>
+  <br>
+    <div class="patientdet">
+      <p><b>Order Summary</b></p>
+      <table style="border: 1px solid black; padding: 5px; text-align: center">
+        <tr style="font-size: 15px">
+          <th width="50px">Sr No.</th>
+          <th>Product Name</th>
+          <th>Mfr Name</th>
+          <th width="50px">Qty</th>
+          <th>Pack Size</th>
+          <th width="60px">MRP</th>
+          <th width="70px">Total Amount</th>
+        </tr>
+        <tr style="font-size: 15px">
+          <td>1</td>
+          <td>Trigaine Solution</td>
+          <td>Apple Therapeutics Ltd</td>
+          <td>3</td>
+          <td>60 ml</td>
+          <td>Rs 362</td>
+          <td>Rs 1086</td>
+        </tr>
+      </table>
+      <br />
+
+      
+
+      <p style="float:right; border: 2px solid black; padding:20px; padding-top:30px"> Total Cost : Rs</span></p>
+    </div>
+    
+    <div id="footer_content" style="font-size: 15px; text-align:right"><img src="C:/Users/adapp/Downloads/Medistop.jpeg" style="height: 100px; width: 175px"/>
+    </div>
+
+  </body>
+</html>

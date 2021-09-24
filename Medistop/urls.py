@@ -33,6 +33,15 @@ urlpatterns = [
     path("prescriptionverify", admin_views.prescriptionVerif, name="PrescriptionVerification"),
     path("verify", admin_views.verify, name="Verify"),
     path("reject", admin_views.reject, name="reject"),
+    path("shipment", admin_views.ShipmentVeri, name="shipment"),
+    path("readqr", admin_views.read_qr, name="read_qr"),
+    path("admindashboard", admin_views.admindash, name="admindash"),
+
+    url('update', admin_views.update, name='update'),
+    url('dele', admin_views.dele, name='dele'),
+    url('invent', admin_views.invent, name='invent'),
+
+
 
     url('login', user_views.login, name='login'),
 
