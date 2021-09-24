@@ -42,7 +42,8 @@ urlpatterns = [
 
 
 
-   
+    path("shipmentstatus/<str:ORDERID>", user_views.shipmentstatus, name='shipmentstatus'),
+
     path('orderhistory',user_views.orderhistory,name="orderhistory"),
     path('', user_views.homepage, name="homepage"),
     path('retprod/', user_views.retprod, name="retprod"),

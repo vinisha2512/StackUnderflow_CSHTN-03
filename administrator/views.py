@@ -142,8 +142,9 @@ def verify(request):
         # email.content_subtype = "html"
         # # email.attach_file('C:/pro/mysite/invoice.pdf')
         # res = email.send()
+        val = "http://127.0.0.1:8000/shipmentstatus"+oid
         ctx = {
-        'shipment_id': "www.google.com"
+        'shipment_id': val
         }
         html_body = render_to_string("mail.html",ctx)
         msg = EmailMultiAlternatives(subject="Verified!", from_email="eat.project.314@gmail.com",

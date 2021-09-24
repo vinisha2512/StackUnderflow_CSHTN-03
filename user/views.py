@@ -235,5 +235,36 @@ def orderhistory(request):
     print(com)
     return render(request,"pastOrders.html",{"data1":pcoms,"data2":coms})
 
+def shipmentstatus(request,ORDERID):
+    order_id=ORDERID
+    print(order_id)
+    uid = request.session["uid"]
+    data1 = database.child("Users").child(uid).child("Orders").child(order_id).child("Content").get()
+    medname=[]
+    p=[]
+    selltype=[]
+    qty=[]
+    for dets1 in data1.each():
+        medname.append(dets1.key())
+        p.append(dets1.val().get("price"))
+        selltype.append(dets1.val().get("sell_type"))
+        qty.append(dets1.val().get("qty"))
+    print(medname,p,selltype,qty)
+    combi = zip(medname,p,selltype,qty)
+    data2 = database.child("Users").child(uid).child("Orders").child(order_id).child("Details").get()
+    scan = data2.val().get("Scan")
+    total = data2.val().get("Total")
+    # if scan == 2:
+    #     a = 2
+    # if scan>=3:
+    #     b = 3
+    d={
+        "oid": order_id,
+        "scan":scan,
+        "total":total,
+        "combi":combi,
+       
+    }
+    return render(request,"shipmenttracker.html",d)
 
 
