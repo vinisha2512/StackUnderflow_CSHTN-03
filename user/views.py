@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from dotenv import load_dotenv
 load_dotenv('\.env')
 from django.http.response import HttpResponse, HttpResponseRedirect
-
+from administrator.views import admindash
 # Create your views here.
 # print(os.getenv("apiKey"))
 config = {
@@ -62,6 +62,10 @@ def login(request):
             message = "Invalid ID or Password"
             print("Error email")
             return render(request, "Home.html") #error message dikhana padega
+        if email == "teamtechknights2021@gmail.com":
+            return redirect(admindash)
+
+
         return redirect(homepage)
     return render(request, "Home.html")
 
