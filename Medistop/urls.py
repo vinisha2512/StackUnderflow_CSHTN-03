@@ -20,7 +20,6 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.conf.urls import url
 from django.urls import include, path
-
 from user import views as user_views
 from payment import views as payment_views
 from prescription import views as presc_views
@@ -43,14 +42,24 @@ urlpatterns = [
 
 
 
-    url('login', user_views.login, name='login'),
+   
 
-    url('signup', user_views.signup, name='signup'),
-    url('reset', user_views.reset, name='reset'),
-
-    url('upload_pres', presc_views.read_presc, name='upload_pres'),
-    url(r'^user/trial/$',presc_views.f1),
+    path('', user_views.homepage, name="homepage"),
+    path('retprod/', user_views.retprod, name="retprod"),
+    path('login/', user_views.login, name='login'),
+    path('signup/', user_views.signup, name='signup'),
+    path('reset', user_views.reset, name='reset'),
+    path('upload_prescription', presc_views.upload, name="upload"),
+    path('prescriptionUpload', presc_views.prescriptionUpload, name="prescriptionUpload"),
+    path('uploaded_meds', presc_views.read_presc, name='upload_pres'),
+    path("cart", presc_views.cart, name="cart"),
+    path('placeOrder', presc_views.placeOrder, name="placeOrder"),
+    path("med_details/<str:MEDNAME>", user_views.med_deets, name='med_details'),
+    path("<str:category>", user_views.med_class, name='med_class'),
+    url(r'^user/incre/$',presc_views.f1),
+    url(r'^user/decre/$',presc_views.f2),
+    url(r'^user/del/$',presc_views.delete),
+    url(r'^addtocart/$',user_views.addtocart),
     url(r'^', user_views.homepage, name="homepage"),
-
     #url('nameforurl', user_views.views_function, name='nameforurl'),
 ]

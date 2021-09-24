@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CART</title>
+  <!--BOOTSTRAP-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+
+  <style>
+    .navbar-nav .nav-item:hover .nav-link {
+      color: cyan;
+    }
+
+    .bi-cart2 {
+      cursor: pointer;
+    }
+
+    .card {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+
+    .modal-content {
+      border-radius: 10px;
+    }
+
+    .form-floating {
+      margin-top: 10%;
+    }
+
+    .modal .btn {
+      width: 70%;
+      margin-top: 10%;
+      color: cyan;
+      background-color: black;
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      margin-left: 15%;
+      height: 50px;
+      font-size: x-large;
+    }
+
+    .modal .btn:hover {
+      color: black;
+      background-color: cyan;
+
+      transform: scale(1.1);
+    }
+
+    #col-form {
+      padding: 5%;
+      align-items: center;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border-left: 1px solid lightgray;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      border: none;
+      border-bottom: 2px solid grey;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    input[type="email"]:focus {
+      border: none;
+      border-bottom: 4px solid cyan;
+      outline: none;
+    }
+
+    input:focus {
+      outline-style: 0;
+    }
+
+    input[placeholder] {
+      color: black !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!--------NAVBAR STARTS--------->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+    <div class="container-fluid ms-5">
+      <a class="navbar-brand fw-bold me-5" href="#">
+        <img src="Logo1.png" alt="" style="height: 35px; width: 102px" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#" style="color: cyan; font-weight: 600">MEDICINES</a>
+          </li>
+          <!-- <li class="nav-item">
+              <a class="nav-link" href="#" style="font-weight: 600">UPLOAD</a>
+            </li> -->
+          <form class="d-flex w-100">
+            <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search"
+              id="navBarSearchForm" style="width: 500px" />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-------CHECKOUT------->
+  {%if manual%}
+  <div class="container-sm mt-4 mb-4">
+    <script>
+      var countCards = 0;
+      let pri = [];
+      let quant = [];
+    </script>
+    {%for medi, sell_type, price, qty, lqty, presc_req in data%}
+    <script>
+      pri.push("{{price}}");
+      quant.push("{{qty}}");
+    </script>
+    <div class="row my-4">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <div class="card border border-3 mt-2 py-2">
+          <div class="row ms-2">
+            <div class="col-10">
+              <div class="card-title ms-3 mb-0">
+                <strong>{{medi}}</strong>
+              </div>
+              <div class="card-body text-secondary mt-0">{{sell_type}}</div>
+            </div>
+            <div class="col-2"><strong>MRP ₹{{price}}</strong></div>
+          </div>
+
+          <form method="post" id="incre">
+            {% csrf_token %}
+            <div class="row mt-2 mb-2">
+              <div class="col-10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" onclick="increment('{{medi}}','del')"
+                  fill="currentColor" class="bi bi-trash ms-4" viewBox="0 0 16 16" style="color: grey; cursor: pointer">
+                  <path
+                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                  <path fill-rule="evenodd"
+                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                </svg>
+                Remove
+              </div>
+
+              <!-- <input type="text" id="{{medi}}" value="{{medi}}" hidden> -->
+
+              <div class="col-2">
+                {%if lqty%}
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" id="minusbtn" onclick="increment('{{medi}}','decre')"
+                  height="18" fill="currentColor" class="bi bi-dash-circle me-1" viewBox="0 0 16 16"
+                  style="cursor: pointer">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                  <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                </svg>
+                <!-- {{qty}} -->
+
+                <label id="{{medi}}">{{qty}}</label>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" id="plusbtn" height="18"
+                  onclick="increment('{{medi}}','incre')" id="11" fill="currentColor"
+                  class="bi bi-plus-circle-fill ms-1" viewBox="0 0 16 16" style="cursor: pointer">
+                  <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                </svg>
+                {%else%}
+                <p style="color: red">OUT OF STOCK</p>
+                {%endif%}
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-2"></div>
+    </div>
+    <script>
+      countCards += 1;
+    </script>
+    {%endfor%} {%if presc_req%}
+    <form action="prescriptionUpload" enctype="multipart/form-data">
+      <input type="file" name="FileUpload" id="file" onchange=funct() />
+      <button type="submit" class="btn btn-primary">UPLOAD</button>
+    </form>
+    {%endif%}
+  </div>
+  {%else%}
+  <div class="container-sm mt-4 mb-4">
+    <script>
+      let pri = [];
+      let quant = [];
+    </script>
+    {%for medi, sell_type, price, qty, lqty in data%}
+    <script>
+      pri.push("{{price}}");
+      quant.push("{{qty}}");
+    </script>
+    <div class="row my-4">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <div class="card border border-3 mt-2 py-2">
+          <div class="row ms-2">
+            <div class="col-10">
+              <div class="card-title ms-3 mb-0">
+                <strong>{{medi}}</strong>
+              </div>
+              <div class="card-body text-secondary mt-0">{{sell_type}}</div>
+            </div>
+            <div class="col-2"><strong>MRP ₹{{price}}</strong></div>
+          </div>
+          <div class="row mt-2 mb-2">
+            <div class="col-10">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                class="bi bi-trash ms-4" viewBox="0 0 16 16" style="color: grey; cursor: pointer">
+                <path
+                  d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                <path fill-rule="evenodd"
+                  d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+              </svg>
+              Remove
+            </div>
+
+            <div class="col-2">
+              {%if lqty%}
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                class="bi bi-dash-circle me-1" viewBox="0 0 16 16" onclick="update('{{medi}}','decre')"
+                style="cursor: pointer">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+              </svg>
+              <label id="{{medi}}">{{qty}}</label>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                class="bi bi-plus-circle-fill ms-1" viewBox="0 0 16 16" onclick="update('{{medi}}','incre')"
+                style="cursor: pointer">
+                <path
+                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+              </svg>
+              {%else%}
+              <p style="color: red">OUT OF STOCK</p>
+              {%endif%}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2"></div>
+    </div>
+    <script>
+      countCards += 1;
+    </script>
+    {%endfor%}
+  </div>
+  {%endif%}
+  <div class="container-xl">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <div class="card border border-dark">
+          <div class="row mt-2">
+            <div class="col-8 ps-5">
+              <p>Item Total(MRP)</p>
+            </div>
+            <div class="col-4">
+              <p id="totalPrice1">₹527.69</p>
+            </div>
+          </div>
+
+          <hr class="mt-0" style="border: 1px solid black" />
+
+          <div class="row mt-0 mb-0">
+            <div class="col-8 ps-5">
+              <p>Shipping Fee</p>
+            </div>
+            <div class="col-4">
+              <p>As per delivery address</p>
+            </div>
+          </div>
+
+          <hr class="mt-0" style="border: 1px solid black" />
+
+          <div class="row mt-0 mb-0">
+            <div class="col-8 ps-5">
+              <p>To be paid</p>
+            </div>
+            <div class="col-4">
+              <p id="totalPrice2">₹527.69</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+
+  <div class="container-xl text-center my-4">
+    <button class="btn btn-lg btn-primary mt-5" style="color: cyan; background-color: black; border: none; width: 350px"
+      type="btn" data-bs-toggle="modal" data-bs-target="#exampleModalc">
+      CHECKOUT
+    </button>
+
+    <div class="modal fade" id="exampleModalc" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+          <div class="card" style="width: 100%">
+            <div class="row g-0">
+              <div class="col-md-12" id="col-login">
+                <div class="card-body">
+                  <h2 class="card-title">Form</h2>
+
+                  <form action="{%url 'placeOrder'%}" id="loginform" method="post">
+                    {%csrf_token%}
+                    <div class="form-floating mb-1 mt-1">
+                      <input type="text" class="form-control shadow-none" name="name" id="LfloatingInput"
+                        placeholder="Name" required />
+                      <label for="LfloatingInput" id="Llabelname">Enter Name
+                      </label>
+                    </div>
+                    <div class="form-floating mb-1 mt-1">
+                      <input type="text" class="form-control shadow-none" name="email" id="LfloatingInput"
+                        placeholder="Email" required />
+                      <label for="LfloatingInput" id="Llabelname">Enter Email-Id
+                      </label>
+                    </div>
+                    <div class="form-floating">
+                      <textarea class="
+                            col-md-12
+                            border-top-0 border-end-0 border-start-0
+                          " style="border-bottom: 2px solid grey" name="address"
+                        placeholder="Enter Address"></textarea>
+                    </div>
+                    <div class="form-floating mt-3">
+                      <input type="text" class="form-control shadow-none" id="LfloatingPhone" name="phoneNo"
+                        placeholder="Phone Number" pattern="[0-9]{10}" required />
+                      <label for="LfloatingPhone" id="Llabelphone">Enter Phone Number</label>
+                    </div>
+                    {%if manual%}
+                    <input type="hidden" name="mode" value="manual">
+                    {%if presc_req%}
+                    <input type="hidden" name="presc_req" value="True">
+                    {%endif%}
+                    {%else%}
+                    <input type="hidden" name="mode" value="auto">
+                    <input type="hidden" name="mode" value="{{presc_link}}">
+                    {%endif%}
+                    <div class="col-md-12 text-center">
+                      <button type="submit" class="btn" id="Lbutton1" style="margin-left: 0">
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center text-lg-start bg-light text-muted bg-dark mt-5">
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05)">
+      © 2021 Copyright:
+      <a class="text-reset fw-bold text-decoration-none" href="#">MediStop.com</a>
+    </div>
+  </footer>
+
+  <!--BOOTSTRAP-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="ModalFunc.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+  <script>
+    function funct() {
+      console.log(document.getElementById("file").files)
+      document.getElementById('files').value = document.getElementById("file").files
+      console.log(document.getElementById("files").innerHTML)
+    }
+    console.log(countCards);
+    var finalPrice = 0;
+    for (var i = 0; i < countCards; i++) {
+      console.log(finalPrice);
+      finalPrice = finalPrice + parseFloat(pri[i]) * parseFloat(quant[i]);
+      document.getElementById("totalPrice1").innerHTML = finalPrice;
+      document.getElementById("totalPrice2").innerHTML = finalPrice;
+    }
+  </script>
+  <script>
+    function update(r, fntype) {
+      var value = document.getElementById(r).textContent;
+      if (fntype == "incre") {
+        value = parseInt(value) + 1;
+        finalPrice = finalPrice + parseFloat(pri[i]);
+      } else if (fntype == "decre") {
+        value = parseInt(value) - 1;
+        finalPrice = finalPrice - parseFloat(pri[i]);
+      }
+      document.getElementById(r).innerHTML = value;
+      document.getElementById("totalPrice1").innerHTML = finalPrice;
+      document.getElementById("totalPrice2").innerHTML = finalPrice;
+    }
+  </script>
+
+  <script>
+    let value = "";
+    let mednam = "";
+    function increment(r, fntype) {
+      console.log(r);
+
+      // c console.log(r.document.value);
+      var value = document.getElementById(r).textContent;
+      if (fntype == "incre") {
+        value = parseInt(value) + 1;
+        finalPrice = finalPrice + parseFloat(pri[i]);
+      } else if (fntype == "decre") {
+        value = parseInt(value) - 1;
+        finalPrice = finalPrice - parseFloat(pri[i]);
+      }
+
+      document.getElementById("totalPrice1").innerHTML = finalPrice;
+      document.getElementById("totalPrice2").innerHTML = finalPrice;
+
+      document.getElementById(r).innerHTML = value;
+      medname = r;
+
+      console.log(fntype);
+      url1 = "/user/" + fntype + "/";
+      $.ajax({
+        type: "POST",
+        url: url1,
+        data: {
+          name: medname,
+          quantity: value,
+          csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+        },
+        success: function (response) {
+          console.log(response);
+          if (response == "no") {
+            console.log(
+              "Cannot add more, disable the btn and show msg, out of stock"
+            );
+          }
+          alert("Success");
+        },
+      });
+    }
+  </script>
+</body>
+
+</html>
