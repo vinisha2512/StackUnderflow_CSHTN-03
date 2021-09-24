@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <title>Product</title>
+  <style>
+    .navbar-nav .nav-item:hover .nav-link {
+      color: cyan;
+    }
+
+    .bi-cart2 {
+      cursor: pointer;
+    }
+
+    /*---------PRDOUCT DESC------------*/
+    .medicine-name {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .manufacturer {
+      font-size: 14px;
+    }
+
+    .product-highlights-title {
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .product-highlights-body {
+      word-break: break-word;
+      font-size: 14px;
+    }
+
+    .rupee {
+      font-size: 23px;
+      font-weight: 500;
+    }
+
+    .form-check-input {
+      margin-top: 10px;
+    }
+
+    .presc {
+      background-color: #edf9ee;
+      padding: 6px 5px;
+      margin-top: -24px;
+      margin-left: -24px;
+      margin-right: -24px;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .autocomplete-items {
+      position: absolute;
+      border: 1px solid #d4d4d4;
+      z-index: 99;
+      /*position the autocomplete items to be the same width as the container:*/
+      top: 100%;
+      left: 0;
+      right: 0;
+      width: 500px;
+      margin-left: 7.5%;
+    }
+
+    .autocomplete-items div {
+      padding: 10px;
+      cursor: pointer;
+      background-color: #fff;
+      border-bottom: 1px solid #d4d4d4;
+    }
+
+    /*when hovering an item:*/
+    .autocomplete-items div:hover {
+      background-color: #e9e9e9;
+    }
+
+    img {
+      width: 350px;
+      height: 450px;
+      object-fit: fill;
+    }
+
+    /*when navigating through the items using the arrow keys:*/
+    .autocomplete-active {
+      background-color: DodgerBlue !important;
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+  <!--------NAVBAR STARTS--------->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+    <div class="container-fluid ms-5">
+      <a class="navbar-brand fw-bold me-5" href="#">
+        <img src="{%static " images/Logo1.png"%}" alt="" style="height: 35px; width: 102px" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#" style="color: cyan; font-weight: 600">MEDICINES</a>
+          </li>
+
+          <form class="d-flex w-100">
+            <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search"
+              id="navBarSearchForm" style="width: 500px" />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </ul>
+        <div class="d-flex me-5">
+          <button class="btn" style="background-color: black; color: cyan; font-weight: 600">
+            Upload
+          </button>
+          <button class="btn text-light" type="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Login
+          </button>
+          <!-- Login Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+              <div class="modal-content">
+                <div class="card" style="width: 100%">
+                  <div class="row g-0">
+                    <div class="col-md-6">
+                      <div class="leftdiv">
+                        <img src="{%static 'svg/login-01.svg'%}" class="img-fluid rounded-start" alt="..." />
+                      </div>
+                    </div>
+                    <div class="col-md-6" id="col-login">
+                      <div class="card-body">
+                        <h1 class="card-title">Login</h1>
+                        <form action="#" id="loginform">
+                          <div class="form-floating mb-3">
+                            <input type="email" class="form-control shadow-none" id="LfloatingInput"
+                              placeholder="name@example.com" required />
+                            <label for="LfloatingInput" id="Llabelemail">Enter Email Id
+                            </label>
+                          </div>
+                          <div class="form-floating">
+                            <input type="password" class="form-control shadow-none" id="LfloatingPassword"
+                              placeholder="Password" required />
+                            <label for="LfloatingPassword" id="Llabelpassword">Password</label>
+                          </div>
+                          <p onclick="reset()" style="float: right; margin-top: 0px" id="forgot">
+                            Forgot Password
+                          </p>
+                          <button type="button" class="btn" id="Lbutton1">
+                            Login
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ---- -->
+          <span class="ms-1 mt-1 me-1 text-light" style="display: inline-block">|</span>
+          <button class="btn text-light" type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+            Signup
+          </button>
+          <!-- Signup Modal -->
+          <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+              <div class="modal-content">
+                <!-- <div class="modal-body">
+                ...
+              </div> -->
+                <div class="card" style="width: 100%">
+                  <div class="row g-0">
+                    <div class="col-md-6">
+                      <div class="leftdiv">
+                        <img src="{%static " svg/Signup-01.svg"%}" class="img-fluid rounded-start" alt="..." />
+                      </div>
+                    </div>
+                    <div class="col-md-6" id="col-login">
+                      <div class="card-body">
+                        <h1 class="card-title">Signup</h1>
+                        <form action="#" id="loginform">
+                          <div class="first" id="1">
+                            <div class="form-floating mb-3">
+                              <input type="text" class="form-control shadow-none" id="floatingInputName"
+                                placeholder="Rahul Sharma" required />
+                              <label for="floatingInputName" id="labelname">Enter Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                              <input type="email" class="form-control shadow-none" id="floatingInput"
+                                placeholder="name@example.com" onkeyup="echeck();" required />
+                              <label for="floatingInput" id="labelemail">Enter Email Id
+                              </label>
+                              <span id="emmessage"></span>
+                            </div>
+                            <div class="row">
+                              <div class="col">
+                                <div class="form-floating">
+                                  <input type="password" class="form-control shadow-none" id="floatingPassword"
+                                    placeholder="Password" onkeyup="passcheck();" required />
+                                  <label for="floatingPassword" id="labelpassword">Set Password</label>
+                                  <span id="passmessage"></span>
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-floating">
+                                  <input type="password" class="form-control shadow-none" id="floatingCPassword"
+                                    placeholder="Confirm Password" onkeyup="check();" required />
+                                  <label for="floatingCPassword" id="labelcpassword">Confirm Password</label>
+                                  <span id="message"></span>
+                                </div>
+                              </div>
+                            </div>
+                            <button type="button" class="btn" onclick="enablephone();" id="buttonNext" disabled>
+                              Next
+                            </button>
+                          </div>
+                          <div class="second" id="2">
+                            <div>
+                              <p>
+                                1. Make sure all the details on the previous
+                                page are filled.<br />
+                                2. OTP will be sent to your provided Mobile
+                                Number.<br />
+                                3. Enter the OTP to Complete Your Verification
+                                process.
+                              </p>
+                            </div>
+                            <div class="form-floating mb-3">
+                              <input type="tel" class="form-control shadow-none" id="floatingPhone"
+                                placeholder="9925159827" pattern="[789][0-9]{9}" max-length="10" min-length="10"
+                                onkeyup="pcheck();" required />
+                              <label for="floatingPhone" id="labelno">Enter Phone Number</label>
+                              <span id="pmessage"></span>
+                            </div>
+                            <div class="form-floating mb-3">
+                              <input type="number" class="form-control shadow-none" id="floatingOTP"
+                                placeholder="456273" pattern="[0-9]{6}" max-length="6" min-length="6"
+                                onkeyup="otpcheck();" required />
+                              <label for="floatingOTP" id="labelotp">OTP</label>
+                              <span id="otpmessage"></span>
+                            </div>
+                            <button type="button" class="btn" onclick="prev();" id="buttonPrev">
+                              Previous
+                            </button>
+                            <button type="button" class="btn" onclick="sendOTP();" id="buttonOTP">
+                              Send OTP
+                            </button>
+                            <button type="button" class="btn" id="button1" disabled>
+                              SignUp
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ---------- -->
+          <a href="{%url 'cart'%}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+            class="bi bi-cart2 mt-1 ms-3" viewBox="0 0 16 16" style="color: white">
+            <path
+              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+          </svg>
+          </a>
+          <span class="badge rounded-pill" id="myspan" style="font-size: 15px;
+          position: absolute;
+          top: 5px;
+          right: 52px;
+          width: 20px;
+          height: 20px;
+          color: #fff;
+          border-radius: 50%"> 0 </span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!----------PRODUCT DESC---------->
+
+  <div class="container-xl mt-5">
+    <div class="row">
+      <div class="col-8">
+        <div class="row">
+          <div class="col-6">
+            <img class="img-fluid" src={{url}} alt="" />
+          </div>
+          <div class="col-6 ps-4">
+            <div>
+              <h1 class="medicine-name">{{name}}</h1>
+              <p class="manufacturer">{{manu}}</p>
+            </div>
+            <div class="product-highlights">
+              <div class="product-highlights-title">Product Highlights</div>
+              <div class="product-highlights-body">
+                <ul>
+                  {% for i in howto%}
+                  <li>
+                    {{i}}
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 ps-5">
+        <div class="card border-primary" style="width: 18rem">
+          <div class="card-body p-4">
+            <div class="presc">
+              <p class="mb-1">{{pres}}</p>
+            </div>
+            <h5 class="card-title mt-2">MRP</h5>
+            <div class="form-check">
+              <label class="form-check-label rupee" for="flexRadioDefault1">
+                {{mrp}}
+              </label>
+            </div>
+            <p class="mt-3" style="font-size: 12px">Inclusive all taxes</p>
+
+            <form id="addtocart">{% csrf_token %}
+              <input type="number" min="0" id="qty_cart" max={{qty_left}} step="1" />
+              <span style="font-size: 16px">strips of tablets</span>
+              <input type="text" value="{{name}}" id="medname_cart" hidden>
+              <div class="d-grid gap-2 mt-3">
+                <button type="submit" class="btn btn-primary fw-bold" type="button">
+                  ADD TO CART
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!----------MEDICINE DESC---------->
+
+  <div class="container-xl my-5">
+    <div class="row">
+      <div class="col-8 lh-lg">
+        <div class="card border border-2 pb-3" style="
+              height: 423px;
+              border-color: rgb(104, 104, 104);
+              border-radius: 10px;
+            ">
+          <h2 class="fs-4 mb-3 card-header">
+            Information about {{name}}
+          </h2>
+          <div class="med-body overflow-auto ps-5">
+            <div>
+              <strong>Manufacturer:</strong>
+              <span>{{manu}}</span>
+            </div>
+            <div>
+              <strong>Ingredients:</strong>
+              <ul>
+                {% for x in salt%}
+                <li>{{x}}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div>
+              <strong>Type of Sell: </strong>
+              <span>{{typeofsell}}</span>
+            </div>
+            <div>
+              <strong>Treatment of:</strong>
+              <ul>
+                {%for a in uses%}
+                <li>{{a}}</li>
+                {% endfor%}
+              </ul>
+            </div>
+            <div>
+              <strong>Side Effects: </strong>
+              <ul>
+                {%for z in side%}
+                <li>{{z}}</li>
+                {%endfor%}
+              </ul>
+            </div>
+            <div>
+              <strong>Directions For Use:</strong>
+              <ul>
+                {% for w in howto %}
+                <li>
+                  {{w}}
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div>
+              <strong>Chemical Class:</strong>
+              <span>{{chem}}</span>
+            </div>
+            <div>
+              <strong>Habit Forming:</strong>
+              <span>{{habbit}}</span>
+            </div>
+            <div>
+              <strong>Therapeutic Class:</strong>
+              <span>{{thera}}</span>
+            </div>
+            <div>
+              <strong>Action Class:</strong>
+              <span>{{action}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4 ps-4">
+        <div class="card">
+          <div class="card-header text-center fw-bold fs-5">
+            Alternate Medicines
+          </div>
+          <div class="card-body">
+            <table class="table" style="line-height: 3">
+              <tbody>
+                {% for h in alter%}
+                <tr>
+                  <th>
+                    <p class="card-text">{{h}}</p>
+                  </th>
+                  <td>
+                    <div class="d-grid gap-2 mt-1">
+                      <button class="btn btn-primary" type="button">
+                        Add to Cart
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--------FOOTERRR--------->
+  <footer class="text-center text-lg-start bg-light text-muted bg-dark">
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05)">
+      © 2021 Copyright:
+      <a class="text-reset fw-bold text-decoration-none" href="#">MediStop.com</a>
+    </div>
+  </footer>
+
+  <script src="./src/bootstrap-input-spinner.js"></script>
+  <script>
+    $("input[type='number']").inputSpinner();
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script>
+    document.getElementById("myspan").textContent = localStorage.getItem("cartItems")
+  </script>
+<script>
+  $(document).on('submit','#addtocart',function(e){
+      e.preventDefault();
+      $.ajax({
+          type:'POST',
+          url:'/addtocart/',
+          data:{
+              name:$('#medname_cart').val(),
+              quantity:$('#qty_cart').val(),
+              csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+          },
+          success:function(response){
+            qty = document.getElementById("qty_cart").value;
+            try{
+              cart = parseInt(localStorage.getItem("cartItems")) + parseInt(qty)
+              localStorage.setItem("cartItems", cart)
+              document.getElementById("myspan").textContent = cart
+            }
+            catch (e) {
+              localStorage.setItem("cartItems", qty)
+              document.getElementById("myspan").textContent = qty
+            }
+            document.getElementById('qty_cart').max=response;
+          }
+      });
+  });
+
+</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+    <script src="{%static 'js/ModalFunc.js'%}"></script>
+    <script src='{% static "js/autosuggest.js" %}'></script>
+  <script>
+</script>
+</body>
+
+</html>
