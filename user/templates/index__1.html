@@ -470,9 +470,7 @@
     $("input[type='number']").inputSpinner();
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script>
-    document.getElementById("myspan").textContent = localStorage.getItem("cartItems")
-  </script>
+  
 <script>
   $(document).on('submit','#addtocart',function(e){
       e.preventDefault();
@@ -485,17 +483,7 @@
               csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
           },
           success:function(response){
-            qty = document.getElementById("qty_cart").value;
-            try{
-              cart = parseInt(localStorage.getItem("cartItems")) + parseInt(qty)
-              localStorage.setItem("cartItems", cart)
-              document.getElementById("myspan").textContent = cart
-            }
-            catch (e) {
-              localStorage.setItem("cartItems", qty)
-              document.getElementById("myspan").textContent = qty
-            }
-            document.getElementById('qty_cart').max=response;
+            console.log("Added to cart")
           }
       });
   });

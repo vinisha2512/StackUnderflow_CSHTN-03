@@ -6,7 +6,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="{%static 'images/medicine1.png'%}">
+  <link rel="icon" type="image/png" href='{% static "image/medicine1.png"%}'>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <link rel="stylesheet" href="{%static 'css/SeeAll.css'%}">
@@ -33,7 +33,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
     <div class="container-fluid ms-5">
       <a class="navbar-brand fw-bold me-5" href="#">
-        <img src="{%static 'images/Logo1.png'%}" alt="" style="height: 35px; width: 102px" />
+        <img src='{%static "image/Logo1.png"%}' alt="" style="height: 35px; width: 102px" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -242,23 +242,22 @@
               </div>
             </div>
           </div>
+          {%else%}
+          <a href="{%url 'logout'%}"><button class="btn text-light" type="submit">Logout</button></a>
           {%endif%}
         </div>
       </div>
 
       <!-- ---------- -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart2 mt-1 ms-3"
-        viewBox="0 0 16 16" style="color: white">
-        <path
-          d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-      </svg>
+      <a href="{%url 'cart'%}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart2 mt-1 ms-3"
+          viewBox="0 0 16 16" style="color: white">
+          <path
+            d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+        </svg>
+      </a>
     </div>
   </nav>
-
-
-
-
-
 
   <div class="card" id="list1">
     <div class="row">
@@ -269,14 +268,12 @@
         <button class="btn float-end" style="width: 80px;">Back</button>
       </div>
     </div>
-    <div class="row"> 
-      {%for a in data1%} 
+    <div class="row">
+      {%for a in data1%}
       <div class="col">
         <a href="{% url 'med_details' MEDNAME=a.0 %}">
           <div class="card">
-            <img
-              src="{{a.4}}"
-              class="card-img-top" alt="...">
+            <img src="{{a.4}}" class="card-img-top" alt="...">
             <div class="card-body">
               <h6>{{a.0}}</h6>
               <p class="card-text">{{a.1}}</p>
@@ -289,14 +286,12 @@
       </div>
       {%endfor%}
     </div>
-    <div class="row"> 
-      {%for a in data2%} 
+    <div class="row">
+      {%for a in data2%}
       <div class="col">
         <a href="{% url 'med_details' MEDNAME=a.0 %}">
           <div class="card">
-            <img
-              src="{{a.4}}"
-              class="card-img-top" alt="...">
+            <img src="{{a.4}}" class="card-img-top" alt="...">
             <div class="card-body">
               <h6>{{a.0}}</h6>
               <p class="card-text">{{a.1}}</p>
@@ -309,14 +304,12 @@
       </div>
       {%endfor%}
     </div>
-    <div class="row"> 
-      {%for a in data3%} 
+    <div class="row">
+      {%for a in data3%}
       <div class="col">
         <a href="{% url 'med_details' MEDNAME=a.0 %}">
           <div class="card">
-            <img
-              src="{{a.4}}"
-              class="card-img-top" alt="...">
+            <img src="{{a.4}}" class="card-img-top" alt="...">
             <div class="card-body">
               <h6>{{a.0}}</h6>
               <p class="card-text">{{a.1}}</p>
@@ -329,14 +322,12 @@
       </div>
       {%endfor%}
     </div>
-    <div class="row"> 
-      {%for a in data4%} 
+    <div class="row">
+      {%for a in data4%}
       <div class="col">
         <a href="{% url 'med_details' MEDNAME=a.0 %}">
           <div class="card">
-            <img
-              src="{{a.4}}"
-              class="card-img-top" alt="...">
+            <img src="{{a.4}}" class="card-img-top" alt="...">
             <div class="card-body">
               <h6>{{a.0}}</h6>
               <p class="card-text">{{a.1}}</p>
@@ -348,7 +339,7 @@
         </a>
       </div>
       {%endfor%}
-    </div>    
+    </div>
   </div>
   <!-- -------------------------------------------------------------------- -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"

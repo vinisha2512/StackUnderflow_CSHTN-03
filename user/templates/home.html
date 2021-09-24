@@ -6,7 +6,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="medicine1.png">
+  <link rel="icon" type="image/png" href='{% static "image/medicine1.png"%}'>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <link rel="stylesheet" href='{%static "css/Home.css" %}'>
@@ -14,25 +14,25 @@
   <title>MediStop</title>
   <style>
     div.dropdown-multicol {
-        width: 30em;
-      }
-      div.dropdown-row > a.dropdown-item {
-        display: inline-block;
-        width: 20%;
-      }
-      .navbar-nav .dropdown-menu {
-        width: 754px;
-      }
+      width: 30em;
+    }
+
+    div.dropdown-row>a.dropdown-item {
+      display: inline-block;
+      width: 20%;
+    }
+
+    .navbar-nav .dropdown-menu {
+      width: 754px;
+    }
   </style>
 </head>
 
 <body>
-  <!--------NAVBAR STARTS--------->
-  <!--------NAVBAR STARTS--------->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
     <div class="container-fluid ms-5">
       <a class="navbar-brand fw-bold me-5" href="#">
-        <img src="{%static 'images/Logo1.png'%}" alt="" style="height: 35px; width: 102px" />
+        <img src='{%static "image/Logo1.png"%}' alt="" style="height: 35px; width: 102px" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,60 +41,51 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              style="color: cyan; font-weight: 600"
-            >
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false" style="color: cyan; font-weight: 600">
               MEDICINES
             </a>
-            <div
-              class="dropdown-menu dropdown-multicol"
-              aria-labelledby="dropdownMenuButton"
-            >
+            <div class="dropdown-menu dropdown-multicol" aria-labelledby="dropdownMenuButton">
               <div class="dropdown-row">
-                <a class="dropdown-item" href="#">DERMA</a>
-                <a class="dropdown-item" href="#">RESPIRATORY</a>
-                <a class="dropdown-item ps-5" href="#">ANTI INFECTIVES</a>
+                <a class="dropdown-item" href="{% url 'med_class' category='DERMA' %}">DERMA</a>
+                <a class="dropdown-item" href="{% url 'med_class' category='RESPIRATORY' %}">RESPIRATORY</a>
+                <a class="dropdown-item ps-5" href="{% url 'med_class' category='ANTI INFECTIVES' %}">ANTI
+                  INFECTIVES</a>
               </div>
               <div class="dropdown-row">
-                <a class="dropdown-item" href="#">UROLOGY</a>
-                <a class="dropdown-item" href="#">ANTI DIABETIC</a>
+                <a class="dropdown-item" href="{% url 'med_class' category='UROLOGY' %}">UROLOGY</a>
+                <a class="dropdown-item" href="{% url 'med_class' category='ANTI DIABETIC' %}">ANTI DIABETIC</a>
 
-                <a class="dropdown-item ps-5" href="#"
-                  >VITAMINS MINERALS NUTRIENTS</a
-                >
+                <a class="dropdown-item ps-5"
+                  href="{% url 'med_class' category='VITAMINS MINERALS NUTRIENTS' %}">VITAMINS MINERALS NUTRIENTS</a>
               </div>
               <div class="dropdown-row">
-                <a class="dropdown-item" href="#">CARDIAC</a>
-                <a class="dropdown-item" href="#">STOMATOLOGICALS</a>
-                <a class="dropdown-item ps-5" href="#">GASTRO INTESTINAL</a>
+                <a class="dropdown-item" href="{% url 'med_class' category='CARDIAC' %}">CARDIAC</a>
+                <a class="dropdown-item" href="{% url 'med_class' category='STOMATOLOGICALS' %}">STOMATOLOGICALS</a>
+                <a class="dropdown-item ps-5" href="{% url 'med_class' category='GASTRO INTESTINAL' %}">GASTRO
+                  INTESTINAL</a>
               </div>
               <div class="dropdown-row">
-                <a class="dropdown-item" href="#">HORMONES</a>
-                <a class="dropdown-item" href="#">BLOOD RELATED</a>
-                <a class="dropdown-item ps-5" href="#">OPHTHAL OTOLOGICALS</a>
+                <a class="dropdown-item" href="{% url 'med_class' category='HORMONES' %}"">HORMONES</a>
+                <a class=" dropdown-item" href="{% url 'med_class' category='BLOOD RELATED' %}">BLOOD RELATED</a>
+                <a class="dropdown-item ps-5" href="{% url 'med_class' category='OPHTHAL' %}">OPHTHAL OTOLOGICALS</a>
               </div>
               <div class="dropdown-row">
-                <a class="dropdown-item" href="#">OTOLOGICALS</a>
-                <a class="dropdown-item" href="#">PAIN ANALGESICS</a>
-                <a class="dropdown-item ps-5" href="#">ANTI MALARIALS</a>
+                <a class="dropdown-item" href="{% url 'med_class' category='OTOLOGICALS' %}">OTOLOGICALS</a>
+                <a class="dropdown-item" href="{% url 'med_class' category='PAIN ANALGESICS' %}">PAIN ANALGESICS</a>
+                <a class="dropdown-item ps-5" href="{% url 'med_class' category='ANTI MALARIALS' %}">ANTI MALARIALS</a>
               </div>
               <div class="dropdown-row">
-                <a class="dropdown-item" href="#">VACCINES</a>
-                <a class="dropdown-item" href="#">NEURO CNS</a>
-                <a class="dropdown-item ps-5" href="#">ANTI NEOPLASTICS</a>
+                <a class="dropdown-item" href="{% url 'med_class' category='VACCINES' %}">VACCINES</a>
+                <a class="dropdown-item" href="{% url 'med_class' category='NEURO CNS' %}">NEURO CNS</a>
+                <a class="dropdown-item ps-5" href="{% url 'med_class' category='ANTI NEOPLASTICS' %}">ANTI
+                  NEOPLASTICS</a>
               </div>
               <div class="dropdown-row">
-                <a class="dropdown-item" href="#">OPHTHAL</a>
-                <a class="dropdown-item" href="#">GYNAECOLOGICAL</a>
-                <a class="dropdown-item ps-5" href="#"
-                  >SEX STIMULANTS REJUVENATORS</a
-                >
+                <a class="dropdown-item" href="{% url 'med_class' category='OPHTHAL' %}">OPHTHAL</a>
+                <a class="dropdown-item" href="{% url 'med_class' category='GYNAECOLOGICAL' %}">GYNAECOLOGICAL</a>
+                <a class="dropdown-item ps-5" href="{% url 'med_class' category='SEX STIMULANTS REJUVENATORS' %}">SEX
+                  STIMULANTS REJUVENATORS</a>
               </div>
             </div>
           </li>
@@ -115,9 +106,9 @@
         </ul>
         <div class="d-flex me-5">
           <a href="{%url 'upload'%}">
-          <button class="btn" style="background-color: black; color: cyan; font-weight: 600">
-            Upload
-          </button>
+            <button class="btn" style="background-color: black; color: cyan; font-weight: 600">
+              Upload
+            </button>
           </a>
           {%if not request.session.loggedin%}
           <button class="btn text-light ms-2" type="btn" data-bs-toggle="modal"
@@ -183,7 +174,6 @@
                     <div class="col-md-6">
                       <div class="leftdiv">
                         <img src="{%static 'svg/Signup-01.svg'%}" class="img-fluid rounded-start" alt="...">
-
                       </div>
                     </div>
                     <div class="col-md-6" id="col-login">
@@ -258,6 +248,8 @@
               </div>
             </div>
           </div>
+          {%else%}
+          <a href="{%url 'logout'%}"><button class="btn text-light" type="submit">Logout</button></a>
           {%endif%}
         </div>
       </div>
@@ -279,10 +271,10 @@
     <div class="card" id="list1">
       <div class="row">
         <div class="col-md-6">
-          <h2 class="list-title">DERMA</h2>
+          <h2 class="list-title">RESPIRATORY</h2>
         </div>
         <div class="col-md-6">
-          <a <button class="btn float-end" href="{% url 'med_class' category='DERMA' %}"
+          <a href="{% url 'med_class' category='RESPIRATORY' %}"> <button class="btn float-end"
             style="width: 80px; text-decoration:none;">See all</button> </a>
         </div>
       </div>
@@ -290,70 +282,70 @@
         <div class="col">
           <div class="card">
             <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl66ZxjyxKcg5zJE5AtEt0yWT8qLOZypiBWdM6diBBj6_PND743Cb6AF6x3A&s"
               class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Ativan 2mg Tablet</h6>
+              <p class="card-text">Bottle of 30 tablets</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹82.55</h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card">
             <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRycqi7dKmDvmSfXmGdR0KKnPs3FtcEZVRCVB_tFp43IN9khxeB2pAY5vjcPg&s"
               class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Benadryl Syrup 150ml</h6>
+              <p class="card-text">150 ml in 1 bottle</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹118</h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card">
             <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOXAhH-iVRrXkYSZ0tveeh97_m_QqWuQwsQ_7EpgSTYP6-GxhGO2qEMAQAkA&s"
               class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Bro-Zedex Syrup</h6>
+              <p class="card-text">100 ml in 1 bottle</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹129.75</h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card .shadow-3">
             <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHPYOWg2JuM72WdHTQhWaz3IcXh-GBCizG5Tu8zdXkWPZsOMcRzEme0gbT460&s"
               class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Betnesol Tablet</h6>
+              <p class="card-text">20 tablets in 1 strip</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹12.85</h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card">
             <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmdrt5Nzkp7-XS2Z5JnGDdlgpsw1hgHZ2UXZzqBep0x5OLS6ef_Ocphut2scI&s"
               class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Budecort 0.5mg Respules 2ml</h6>
+              <p class="card-text">5 respules in 1 packet</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹118.85</h5>
             </div>
           </div>
         </div>
@@ -362,164 +354,77 @@
     <div class="card" id="list2">
       <div class="row">
         <div class="col-md-6">
-          <h2 class="list-title">VITAMINS MINERALS NUTRIENTS</h2>
+          <h2 class="list-title">DERMA</h2>
         </div>
-
         <div class="col-md-6">
-          <a <button class="btn float-end" href="{% url 'med_class' category='VITAMINS MINERALS NUTRIENTS' %}"
-            style="width: 80px; text-decoration:none;">See all</button></a>
+          <a href="{% url 'med_class' category='DERMA' %}"> <button class="btn float-end" 
+            style="width: 80px; text-decoration:none;">See all</button> </a>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <div class="card">
             <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
+              src="https://mymedicalshop.com/pub/media/catalog/product/cache/619a7ee885a41f3ba1cc53a6da2f486e/6/2/6275.jpg"
               class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Benzac AC 2.5% Gel</h6>
+              <p class="card-text">20 gm in 1 tube</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹83</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="https://5.imimg.com/data5/SELLER/Default/2020/10/GR/QQ/MU/66721154/betnovate-n-500x500.jpg"
+              class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h6>Betnovate-N Cream</h6>
+              <p class="card-text">20 gm in 1 tube</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹36.60</h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card">
             <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf-D0yseoeEuruAiG0IyJf6VGzRiRsH8UTuW8rHZ1VTmUxATZ4ghqiIROMbsE&s"
               class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Lulican Cream</h6>
+              <p class="card-text">30 gm in 1 tube</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
-              class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹375</h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card .shadow-3">
-            <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
-              class="card-img-top" alt="..." />
+            <img src="https://4.imimg.com/data4/TK/PB/MY-2581214/hepcvir-500x500.jpg" class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Betamil GM Cream</h6>
+              <p class="card-text">25 gm in 1 tube</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹32.93</h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card">
-            <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
-              class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card" id="list3">
-      <div class="row">
-        <div class="col-md-6">
-          <h2 class="list-title">PAIN ANALGESICS</h2>
-        </div>
-        <div class="col-md-6">
-          <a <button class="btn float-end" href="{% url 'med_class' category='PAIN ANALGESICS' %}"
-            style="width: 80px; text-decoration:none;">See all</button></a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
-              class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
-              class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
-              class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card .shadow-3">
-            <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
-              class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="https://newassets.apollo247.com/pub/media/catalog/product/c/r/cro0023.jpg" class="card-img-top"
+            <img src="https://images-na.ssl-images-amazon.com/images/I/613M%2B9J5KsL.jpg" class="card-img-top"
               alt="..." />
             <div class="card-body">
-              <h6>Crocin - 500mg</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Candid-B Cream</h6>
+              <p class="card-text">20 gm in 1 tube</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹133.50</h5>
             </div>
           </div>
         </div>
@@ -531,159 +436,78 @@
           <h2 class="list-title">GASTRO INTESTINAL</h2>
         </div>
         <div class="col-md-6">
-          <a <button class="btn float-end" href="{% url 'med_class' category='GASTRO INTESTINAL' %}"
-            style="width: 80px; text-decoration:none;">See all</button></a>
+          <a href="{% url 'med_class' category='GASTRO INTESTINAL' %}"> <button class="btn float-end" 
+            style="width: 80px; text-decoration:none;">See all</button> </a>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <div class="card">
             <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
+              src="https://cdn.shopify.com/s/files/1/0028/9390/6018/products/Anafortan_Tab_copy_1024x1024@2x.jpg?v=1550810701"
               class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Anafortan 25 mg/300 mg Tablet</h6>
+              <p class="card-text">15 tablets in 1 strip</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹113.24</h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card">
             <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMTVfeOa6nKIh8aeymXovwaoCwHHYVhUttu2NXWhJ-VxZ98u7s8hBXL2-JRaY&s"
               class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Avomine Tablet</h6>
+              <p class="card-text">strip of 10 tablets</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹46.27</h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card">
             <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgSx8S6XzYw95Ga-sGWpf2WNMwN2WgG0o8m4oYVmwbaHIuFDe2oTBDaN-gWQ&s"
               class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Buscopan 10mg Tablet</h6>
+              <p class="card-text">10 tablets in 1 strip</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹39.50</h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card .shadow-3">
             <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7uG-p1JfW3MtamRelhe3Fnn4jXhs2g6p-6oRE6YrdFfgk2VnXGoMpL4Y9MDc&s"
               class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Cyclopam Tablet</h6>
+              <p class="card-text">10 tablets in 1 strip</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="https://newassets.apollo247.com/pub/media/catalog/product/c/r/cro0023.jpg" class="card-img-top"
-              alt="..." />
-            <div class="card-body">
-              <h6>Crocin - 500mg</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card" id="list5">
-      <div class="row">
-        <div class="col-md-6">
-          <h2 class="list-title">CARDIAC</h2>
-        </div>
-        <div class="col-md-6">
-          <a <button class="btn float-end" href="{% url 'med_class' category='CARDIAC' %}"
-            style="width: 80px; text-decoration:none;">See all</button></a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="card">
-            <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
-              class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹48.70</h5>
             </div>
           </div>
         </div>
         <div class="col">
           <div class="card">
             <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHjFBBeL15f9N_h53aXzUJTcju3ZnZZa6tZq_R5QyqByQ5N_MsFMTCQZ8mtA&s"
               class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>Duphalac Oral Solution Lemon 450ml</h6>
+              <p class="card-text">450 ml in 1 bottle</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
-              class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card .shadow-3">
-            <img
-              src="https://onemg.gumlet.io/image/upload/a_ignore,w_380,h_380,c_fit,q_auto,f_auto/v1601016652/cropped/l2tsfthu3n4ptphoswzf.png"
-              class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <img src="https://newassets.apollo247.com/pub/media/catalog/product/c/r/cro0023.jpg" class="card-img-top"
-              alt="..." />
-            <div class="card-body">
-              <h6>Crocin - 500mg</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹515.02</h5>
             </div>
           </div>
         </div>

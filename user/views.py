@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from dotenv import load_dotenv
 load_dotenv('\.env')
 from django.http.response import HttpResponse, HttpResponseRedirect
+from django.contrib import auth
 
 # Create your views here.
 # print(os.getenv("apiKey"))
@@ -24,7 +25,6 @@ authe = firebase.auth()
 database = firebase.database()
 storage = firebase.storage()
 
-
 def myuser_login_required(f):
     def wrap(request, *args, **kwargs):
         if 'member_id' not in request.session.keys():
@@ -33,15 +33,6 @@ def myuser_login_required(f):
     wrap._doc_ = f._doc_
     wrap._name_ = f._name_
     return wrap
-
-def xyz(request):
-    return render(request, "home.html")
-
-def retprod(request):
-    meds = list(database.child("Medicine").shallow().get().val())
-    data = {"meds":"_".join(meds)}
-    return render(request, "index.html", data)
-
 
 def homepage(request):
     meds = list(database.child("Medicine").shallow().get().val())
@@ -65,8 +56,6 @@ def login(request):
         return redirect(homepage)
     return render(request, "Home.html")
 
-
-
 def signup(request):
     if request.method == "POST":
         email = request.POST.get("email")
@@ -87,7 +76,7 @@ def signup(request):
 
             request.session['uid']=uid
             request.session['loggedin'] = True
-            database.child("Users").child(uid).child("Details").child("1").set(data)
+            database.child("Users").child(uid).child("Details").set(data)
             return render(request,"Home.html")       
         except:
             message = "Unsuccessful in signing up, try again"
@@ -98,6 +87,11 @@ def signup(request):
         return redirect("dashboard")
     return render(request, "signup.html")
 
+def logout(request):
+    del request.session["uid"]
+    request.session['loggedin'] = False
+    auth.logout(request)
+    return redirect(homepage)
 
 def reset(request):
     email = request.POST.get("email")
@@ -167,13 +161,9 @@ def addtocart(request):
     try:
         value_in_cart = int(dict(database.child("Users").child(UID).child("Cart").child(medname).get().val())["Quantity"]) + number
         database.child("Users").child(UID).child("Cart").child(medname).set({"Quantity":value_in_cart})
-
     except:
-
         database.child("Users").child(UID).child("Cart").child(medname).set({"Quantity":number})
     database.child("Medicine").child(medname).update({"Temp": noofmeets})
-
-
 
     qty_left=int(dict(database.child("Medicine").child(medname).get().val())["Quantity"])
     temp=int(dict(database.child("Medicine").child(medname).get().val())["Temp"])

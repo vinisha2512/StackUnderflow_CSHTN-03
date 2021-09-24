@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{%load static%}
+
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -116,7 +116,7 @@
     </div>
   </nav>
 
-  
+  <!-------CHECKOUT------->
   {%if manual%}
   <div class="container-sm mt-4 mb-4">
     <script>
@@ -129,7 +129,6 @@
       pri.push("{{price}}");
       quant.push("{{qty}}");
     </script>
-    <input type="hidden" class="qty" id="qty{{medi}}" value="{{qty}}">
     <div class="row my-4">
       <div class="col-2"></div>
       <div class="col-8">
@@ -162,7 +161,7 @@
 
               <div class="col-2">
                 {%if lqty%}
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" id="minusbtn" onclick="increment('{{medi}}','decre','{{price}}')"
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" id="minusbtn" onclick="increment('{{medi}}','decre')"
                   height="18" fill="currentColor" class="bi bi-dash-circle me-1" viewBox="0 0 16 16"
                   style="cursor: pointer">
                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -172,7 +171,7 @@
 
                 <label id="{{medi}}">{{qty}}</label>
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" id="plusbtn" height="18"
-                  onclick="increment('{{medi}}','incre','{{price}}')" id="11" fill="currentColor"
+                  onclick="increment('{{medi}}','incre')" id="11" fill="currentColor"
                   class="bi bi-plus-circle-fill ms-1" viewBox="0 0 16 16" style="cursor: pointer">
                   <path
                     d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -191,10 +190,8 @@
       countCards += 1;
     </script>
     {%endfor%} {%if presc_req%}
-    <form action="{%url 'cartpresc'%}" method="post" enctype="multipart/form-data">
-      {%csrf_token%}
+    <form action="prescriptionUpload" enctype="multipart/form-data">
       <input type="file" name="FileUpload" id="file" onchange=funct() />
-      <input type="hidden" id="prescmeds" name="presup" value="{{presc_meds}}">
       <button type="submit" class="btn btn-primary">UPLOAD</button>
     </form>
     {%endif%}
@@ -228,7 +225,7 @@
           <div class="row mt-2 mb-2">
             <div class="col-10">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                class="bi bi-trash ms-4" onclick="deleteCard(this)" viewBox="0 0 16 16" style="color: grey; cursor: pointer">
+                class="bi bi-trash ms-4" viewBox="0 0 16 16" style="color: grey; cursor: pointer">
                 <path
                   d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
                 <path fill-rule="evenodd"
@@ -240,14 +237,14 @@
             <div class="col-2">
               {%if lqty%}
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                class="bi bi-dash-circle me-1" viewBox="0 0 16 16" onclick="update('{{medi}}','decre','{{price}}')"
+                class="bi bi-dash-circle me-1" viewBox="0 0 16 16" onclick="update('{{medi}}','decre')"
                 style="cursor: pointer">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
               </svg>
               <label id="{{medi}}">{{qty}}</label>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                class="bi bi-plus-circle-fill ms-1" viewBox="0 0 16 16" onclick="update('{{medi}}','incre','{{price}}')"
+                class="bi bi-plus-circle-fill ms-1" viewBox="0 0 16 16" onclick="update('{{medi}}','incre')"
                 style="cursor: pointer">
                 <path
                   d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -354,8 +351,6 @@
                     <input type="hidden" name="mode" value="manual">
                     {%if presc_req%}
                     <input type="hidden" name="presc_req" value="True">
-                    {%else%}
-                    <input type="hidden" name="presc_link" value="{{presc_link}}">
                     {%endif%}
                     {%else%}
                     <input type="hidden" name="mode" value="auto">
@@ -425,15 +420,15 @@
     }
   </script>
   <script>
-    function update(r, fntype,cost) {
+    function update(r, fntype) {
       var value = document.getElementById(r).textContent;
       if (fntype == "incre") {
         value = parseInt(value) + 1;
-        finalPrice = finalPrice + parseFloat(cost);
+        finalPrice = finalPrice + parseFloat(pri[i]);
         document.getElementById("qty"+r).value = value;
       } else if (fntype == "decre") {
         value = parseInt(value) - 1;
-        finalPrice = finalPrice - parseFloat(cost);
+        finalPrice = finalPrice - parseFloat(pri[i]);
         document.getElementById("qty"+r).value = value;
       }
       console.log(document.getElementById("qty"+r).value)
@@ -446,17 +441,17 @@
   <script>
     let value = "";
     let mednam = "";
-    function increment(r, fntype, cost) {
+    function increment(r, fntype) {
       console.log(r);
 
       // c console.log(r.document.value);
       var value = document.getElementById(r).textContent;
       if (fntype == "incre") {
         value = parseInt(value) + 1;
-        finalPrice = finalPrice + parseFloat(cost);
+        finalPrice = finalPrice + parseFloat(pri[i]);
       } else if (fntype == "decre") {
         value = parseInt(value) - 1;
-        finalPrice = finalPrice - parseFloat(cost);
+        finalPrice = finalPrice - parseFloat(pri[i]);
       }
 
       document.getElementById("totalPrice1").innerHTML = finalPrice;
@@ -487,7 +482,6 @@
       });
     }
   </script>
-  <script src='{% static "js/autosuggest.js" %}'></script>
 </body>
 
 </html>

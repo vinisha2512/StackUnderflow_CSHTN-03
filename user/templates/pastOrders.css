@@ -1,0 +1,193 @@
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+.navbar-nav .nav-item:hover .nav-link {
+  color: cyan;
+}
+
+/* Login */
+.card {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+.modal-content {
+  border-radius: 10px;
+}
+.form-floating {
+  margin-top: 10%;
+}
+.modal .btn {
+  width: 70%;
+  margin-top: 10%;
+  color: cyan;
+  background-color: black;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-left: 15%;
+  height: 50px;
+  font-size: x-large;
+}
+.modal .btn:hover {
+  color: black;
+  background-color: cyan;
+
+  transform: scale(1.1);
+}
+#col-login {
+  padding: 5%;
+  align-items: center;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-left: 1px solid lightgray;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  border: none;
+  border-bottom: 2px solid grey;
+}
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+  border: none;
+  border-bottom: 4px solid cyan;
+  outline: none;
+}
+input:focus {
+  outline-style: 0;
+}
+
+/* Signup */
+
+.leftdiv img {
+  width: 100%;
+  height: 100%;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  align-items: center;
+}
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.form-floating {
+  margin-top: 10%;
+}
+
+/* .btn {
+width: 70%;
+margin-top: 10%;
+color: cyan;
+background-color: black;
+box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+margin-left: 15%;
+height: 50px;
+font-size: x-large;
+}
+
+.btn:hover {
+
+color: black;
+background-color: cyan;
+
+transform: scale(1.1);
+} */
+
+#col-login {
+  padding: 5%;
+  align-items: center;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-left: 1px solid lightgray;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="number"] {
+  border: none;
+  border-bottom: 2px solid grey;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus {
+  border: none;
+  border-bottom: 4px solid cyan;
+  outline: none;
+}
+
+input:focus {
+  outline-style: 0;
+}
+
+/* .leftdiv{
+    width: 60%;
+    height: 60%;
+} */
+.carousel-caption {
+  align-items: baseline;
+}
+.second {
+  display: none;
+}
+#buttonOTP {
+  display: none;
+}
+/*---------------------------------------------------  */
+
+/* product div */
+
+#list1 {
+  width: 100%;
+  background-color: #f5f3f4be;
+  padding: 10px;
+  border: none;
+}
+
+.col {
+  padding: 10px;
+}
+
+.col .card {
+  width: 250px;
+  height: 350px;
+  padding: 10px;
+  border: 0.5px solid black;
+  align-items: center;
+  background-color: white;
+}
+
+.col .card:hover {
+  transform: scale(1.05);
+}
+
+.card-img-top {
+  width: 70%;
+  height: 250px;
+}
+
+.list-title {
+  bottom: 0;
+  margin-left: 20px;
+}
+
+.btn {
+  background-color: black;
+  color: cyan;
+  top: 0;
+  left: 0;
+}
+/* products */
