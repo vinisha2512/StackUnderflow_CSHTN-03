@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <style>
+    * {
+      overflow-x: hidden;
+    }
+    .card{
+      border-radius: 10px;
+    }
+   .container{
+     margin-left: 12%;
+     margin-top: 140px;
+   }
+   .row{
+     margin-left: 4%;
+   }
+   .card:hover{
+     transform: scale(1.1);
+   }
+   a{
+     text-decoration: none;
+   }
+   footer{
+     bottom: 0;
+     margin-top: 160px;
+   }
+  </style>
+  <body>
+    <!--------NAVBAR STARTS--------->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+      <div class="container-fluid ms-5">
+        <a class="navbar-brand fw-bold me-5" href="#">
+          <img src="Logo1.png" alt="" style="height: 35px; width: 102px" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="#"
+                style="color: cyan; font-weight: 600"
+                >MEDICINES</a
+              >
+            </li>
+          </ul> -->
+          <!-- <form class="d-flex me-5">
+            <button class="btn text-light" type="submit">Login</button>
+            <span
+              class="ms-1 mt-1 me-1 text-light"
+              style="display: inline-block"
+              >|</span
+            >
+            <button class="btn text-light" type="submit">Signup</button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              fill="currentColor"
+              class="bi bi-cart2 mt-1 ms-3"
+              viewBox="0 0 16 16"
+              style="color: white"
+            >
+              <path
+                d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"
+              />
+            </svg>
+          </form> -->
+        </div>
+      </div>
+    </nav>
+
+    <!-------CARDS------->
+    <div class="container d-flex">
+      <!-------INVENTORY------->
+      <a href="{% url 'invent' %}">
+      <div
+        class="card text-white bg-dark my-5 mx-5"
+        style="max-width: 18rem; width: 288px; height: 179px"
+      >
+        <div class="card-body text-center mt-3">
+          <img
+            src="inventory_2_white_24dp.svg"
+            alt=""
+            style="width: 50px; margin-bottom: 3px"
+          />
+          <h2 class="mt-2" style="height: 40px">INVENTORY</h2>
+        </div>
+      </div>
+    </a>
+      <!-------PRESCRIPTION VERIFICATION------->
+      <a href="{% url 'PrescriptionVerification' %}">
+      <div
+        class="card text-white bg-dark my-5 mx-5"
+        style="max-width: 18rem; width: 288px; height: 179px"
+      >
+        <div class="card-body text-center mt-3">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAACiUlEQVR4nO2Zv2tUQRDHZ6NJY4z12QnB2pBKK7EQIZWVoIWof4WFYKMgVmKrvULAJmKlIKQQxF+l2CYoWFiYQhNyHwtfYLPe6dvs7Oye2U93M7cz3/ve27fz7kQajUajsX9xsQsAcggZwZaIXHDOPcnZZCpn8USmReQxcD5nk5oNEDEwoXYDRIyuhN4QkLu+x2YVJhQ0oA4TChiwWZUJBQxYAn5UY4K1AV2sHhNKGNDF6zChlAFdrrwJJQ3o8mVNsDYggj2ZkPww5JyLrhFTP5It59xMzIJJGIVjmI5d8L8ZkJ++94C/7NWvwApwzlKPGgoG+DwEDlroUUPZAIB7FnrGke0UiBAzFJFF59z7WC0xesZhdhN0HSIyEJHlQMNlKx3J7HULBLlBkH6RW884ajkGh6UamxsADETkfhD+ZK1jh6QjKIZ/XJ6PrHSE1LAFnjnnXpZqXtqAVRG5WFKA2RYYwTsROe2c2y6owXYOEJFbXmhBRE5a9VcjZQ4AZoF1L/wGSPoSUueAbA3HvQ+4EqQuebmlILeipUcNBQOmgNdeag04BMwAH734T+C4lh41Ug3ocqeAoZe+AVwPltzW1KOGhgFdftlLbwDfvddrwKymHjW0GgLH+PPn7R16zwYTa0BX686ID78K9H6mn3QDjgDfgpKLlnpKj8LzIjIXxE6UENIbrSsAcMCrEVvgC3DYWk9vFA0IByKfm9Z6eqPREJgDPntl1tk9Im8AR630RKFkwN2gzFXgWhB7YKUnitSGwDy7z/8PwAF+j8hvvfg2sJBbTzQKBjwNSpz1cmeC3PPceqr7ezyWVD2l54DiNANKCyhN8o+iJnfejOz7K6AZUFpAo9FoNBrl+AUz1lKCAkfZvgAAAABJRU5ErkJggg=="
+          />
+          <h2 class="mt-2" style="height: 40px">PRESCRIPTION</h2>
+        </div>
+      </div>
+    </a>
+      <!-------SHIPMENT-------->
+      <a href="{% url 'shipment' %}">
+      <div
+        class="card text-white bg-dark my-5 mx-5"
+        style="max-width: 18rem; width: 288px; height: 179px"
+      >
+        <div class="card-body text-center mt-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="50"
+            height="50"
+            fill="currentColor"
+            class="bi bi-truck"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+            />
+          </svg>
+          <h2 class="mt-2" style="height: 40px">SHIPMENT</h2>
+        </div>
+      </div>
+    </a>
+    </div>
+
+    <!--------GRAPH-------->
+	
+	
+ <!-- <div class="row">
+  
+  <div class="col pb-5">
+  <div class="card ms-5 p-3" style="width: 37rem; border-width:2px; border-color: cyan;">
+  <p style="font-weight:bolder; font-size:20px; text-align:center;">Top 5 Medicines Sold<p>
+  <div class="card-content">
+  <canvas id="myChart"></canvas>
+   </div>
+  </div>
+  </div>
+  <div class="col-6 pb-5">
+  <div class="card ms-3 p-3" style="width: 37rem; border-width:2px; border-color: cyan;">
+  <p style="font-weight:bolder; font-size:20px; text-align:center;">Medicine Categories Sales %<p>
+  <div class="card-content">
+  <canvas id="myChart1"></canvas>
+   </div>
+  </div>
+   </div>
+   </div> -->
+   
+   
+    <!--------FOOTERRR--------->
+    <footer class="text-center text-lg-start bg-light text-muted bg-dark">
+      <div
+        class="text-center p-4"
+        style="background-color: rgba(0, 0, 0, 0.05)"
+      >
+        © 2021 Copyright:
+        <a class="text-reset fw-bold text-decoration-none" href="#"
+          >MediStop.com</a
+        >
+      </div>
+    </footer>
+
+    <script>
+      var ctx = document.getElementById("myChart").getContext("2d");
+      var myChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["a", "b", "c", "d", "e"],
+          datasets: [
+            {
+              label: "Medicine Sales",
+              data: [80, 90, 75, 92, 69],
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.4)",
+                "rgba(54, 162, 235, 0.4)",
+                "rgba(255, 206, 86, 0.4)",
+                "rgba(75, 192, 192, 0.4)",
+                "rgba(153, 102, 255, 0.4)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1.5)",
+                "rgba(54, 162, 235, 1.5)",
+                "rgba(255, 206, 86, 1.5)",
+                "rgba(75, 192, 192, 1.5)",
+                "rgba(153, 102, 255, 1.5)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+    </script>
+
+    <script>
+      var ctx = document.getElementById("myChart1").getContext("2d");
+      var myChart1 = new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: ["a", "b", "c", "d", "e"],
+          datasets: [
+            {
+              label: "Medicine Categories",
+              data: [30, 90, 75, 92, 69],
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.4)",
+                "rgba(54, 162, 235, 0.4)",
+                "rgba(255, 206, 86, 0.4)",
+                "rgba(75, 192, 192, 0.4)",
+                "rgba(153, 102, 255, 0.4)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1.5)",
+                "rgba(54, 162, 235, 1.5)",
+                "rgba(255, 206, 86, 1.5)",
+                "rgba(75, 192, 192, 1.5)",
+                "rgba(153, 102, 255, 1.5)",
+              ],
+            },
+          ],
+        },
+        options: {},
+      });
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHIPMENT</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+
+    body {
+      background-color: #eeeeee;
+      font-family: "Open Sans", serif;
+    }
+
+    .container {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    .navbar-nav .nav-item:hover .nav-link {
+      color: cyan;
+    }
+
+    .bi-cart2 {
+      cursor: pointer;
+    }
+
+    .card {
+      position: relative;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      min-width: 0;
+      word-wrap: break-word;
+      background-color: #fff;
+      background-clip: border-box;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 0.1rem;
+    }
+
+    .card-header:first-child {
+      border-radius: calc(0.37rem - 1px) calc(0.37rem - 1px) 0 0;
+    }
+
+    .card-header {
+      padding: 0.75rem 1.25rem;
+      margin-bottom: 0;
+      background-color: #fff;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .track {
+      position: relative;
+      background-color: #ddd;
+      height: 7px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      margin-bottom: 60px;
+      margin-top: 50px;
+    }
+
+    .track .step {
+      -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      width: 25%;
+      margin-top: -18px;
+      text-align: center;
+      position: relative;
+    }
+
+    .track .step.active:before {
+      background: cyan;
+    }
+
+    .track .step::before {
+      height: 7px;
+      position: absolute;
+      content: "";
+      width: 100%;
+      left: 0;
+      top: 18px;
+    }
+
+    .track .step.active .icon {
+      background: #00cccc;
+      color: #fff;
+    }
+
+    .track .icon {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      position: relative;
+      border-radius: 100%;
+      background: #ddd;
+    }
+
+    .track .step.active .text {
+      font-weight: 400;
+      color: #000;
+    }
+
+    .track .text {
+      display: block;
+      margin-top: 7px;
+    }
+
+    .itemside {
+      position: relative;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      width: 100%;
+    }
+
+    .itemside .aside {
+      position: relative;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
+    }
+
+    .img-sm {
+      width: 80px;
+      height: 80px;
+      padding: 7px;
+    }
+
+    ul.row,
+    ul.row-sm {
+      list-style: none;
+      padding: 0;
+    }
+
+    .itemside .info {
+      padding-left: 15px;
+      padding-right: 7px;
+    }
+
+    .itemside .title {
+      display: block;
+      margin-bottom: 5px;
+      color: #212529;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .btn-warning {
+      color: cyan;
+      background-color: black;
+      border-color: black;
+      border-radius: 1px;
+    }
+
+    .btn-warning:hover {
+      color: #00cccc;
+      background-color: black;
+      border-color: black;
+      border-radius: 1px;
+    }
+
+    .text-center {
+      text-align: center !important;
+    }
+
+    .p-4 {
+      padding: 1.5rem !important;
+      font-size: 0.875rem;
+      font-family: IBM Plex Sans, sans-serif;
+      font-weight: 400;
+      line-height: 1.43;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+    <div class="container-fluid ms-5">
+      <a class="navbar-brand fw-bold me-5" href="#">
+        <img src="Logo1.png" alt="" style="height: 35px; width: 102px" />
+      </a>
+
+    </div>
+  </nav>
+  <div class="container">
+    <article class="card">
+      <header class="card-header">My Orders / Tracking <a href="#" class="btn btn-warning" data-abc="true"
+          style="float:right">Payment</a></header>
+      <div class="card-body">
+        <h6></h6>
+        <article class="card">
+          <div class="card-body row">
+            <div class="col">
+              <strong>Estimated Delivery time:</strong> <br />26 October, 2021
+            </div>
+            <div class="col">
+              <strong>Shipping BY:</strong> <br />
+              MediStop, | <i class="fa fa-phone"></i> +1598675986
+            </div>
+
+            <div class="col">
+              <strong>Order ID: </strong> <br />
+              {{oid}}
+            </div>
+          </div>
+        </article>
+        <div class="track">
+          <div class="step {% if scan >= 1%}active{%endif%}">
+            <span class="icon"> <i class="fa fa-check"></i> </span>
+            <span class="text">Order confirmed</span>
+          </div>
+
+          <div class="step {% if scan >= 2%}active{%endif%}">
+            <span class="icon"> <i class="fa fa-truck"></i> </span>
+            <span class="text"> Dispatched </span>
+          </div>
+          <div class="step {% if scan >= 3%}active{%endif%}">
+            <span class="icon"> <i class="fa fa-box"></i> </span>
+            <span class="text">Delivered</span>
+          </div>
+        </div>
+        <hr />
+        
+        <!-- <a href="#" class="btn btn-warning" data-abc="true">
+          <i class="fa fa-chevron-left"></i> Back to orders</a> -->
+      </div>
+    </article>
+  </div>
+
+  <!-------CHECKOUT------->
+  <div class="container-sm mt-4 mb-4">
+    <div class="row">
+      {% for medname,p,selltype,qty in combi%}
+      <div class="card border border-grey border-2 py-2" style="border-radius: 15px">
+        <div class="row ms-2">
+          <div class="col-10">
+            <div class="card-title ms-3 mb-0">
+              <strong>{{medname}}</strong>
+            </div>
+            <div class="card-body text-secondary mt-0">
+              {{selltype}}
+            </div>
+          </div>
+          <div class="col-2"><strong>MRP ₹{{p}}</strong></div>
+        </div>
+        <div class="row mt-2 mb-2">
+          <div class="col-10"></div>
+          <div class="col-2">
+            <label for="">Quantity: {{qty}}</label>
+          </div>
+        </div>
+      </div>
+
+      {%endfor%}
+    </div>
+  </div>
+
+  <div class="container-xl mb-5">
+    <div class="card border border-dark" style="border-radius: 10px">
+      <div class="row mt-2">
+        <div class="col-8 ps-5">
+          <p>Item Total(MRP)</p>
+        </div>
+        <div class="col-4">
+          <p>₹{{total}}</p>
+        </div>
+      </div>
+
+      <hr class="mt-0" style="border: 1px solid black" />
+
+      <div class="row mt-0 mb-0">
+        <div class="col-8 ps-5">
+          <p>Shipping Fee</p>
+        </div>
+        <div class="col-4">
+          <p>As per delivery address</p>
+        </div>
+      </div>
+
+      <hr class="mt-0" style="border: 1px solid black" />
+
+      <div class="row mt-0 mb-0">
+        <div class="col-8 ps-5">
+          <p>To be paid</p>
+        </div>
+        <div class="col-4">
+          <p>₹{{total}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center text-lg-start bg-light text-muted bg-dark">
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05)">
+      © 2021 Copyright:
+      <a class="text-reset fw-bold text-decoration-none" href="#">MediStop.com</a>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -283,7 +283,7 @@ def cart(request):
     request.session["Man_cart"] = cart_dct
     if "Prescription Required" in presc_req:
         prescreq = True
-    combilis = zip(medi, sell_type, price, qty, lqty, presc_req, mfr)
+    combilis = zip(medi, sell_type, price, qty, lqty, presc_req)
     return render(request,"cart.html", {"presc_req": prescreq, "data": combilis, "manual": True,"presc_meds":presmeds})
 
 def cartpresc(request):
@@ -381,6 +381,7 @@ def cartpresc(request):
                                 elif count>indexincsv:
                                     break
                                 count=count+1
+        delete = default_storage.delete(imagename)
         delete = default_storage.delete(cropped_name)
         combilis = zip(medi, sell_type, price, qty, lqty, presc_req)
         print(meds)
@@ -454,37 +455,4 @@ def placeOrder(request):
                     x = request.session["cart"]
                     database.child("Users").child(request.session["uid"]).child("Orders").child(str(ran)).child("Content").child(x["medi"][i]).set({"qty": x["qty"][i], "price": x["price"][i], "sell_type": x["sell_type"][i]})
                 database.child("AdminV").child("UnVeri").child(str(ran)).set({"PrescriptionLink":presc_link, "UID": request.session["uid"]})
-                
         return render(request, "info.html")
-        # name=request.POST.get('name')
-        # address=request.POST.get('address')
-        # phoneNo = request.POST.get("phoneNo")
-        # mode = request.POST.get('mode')
-        # presc_req = request.POST.get("presc_req")
-        # total = request.POST.get("total")
-        # email = request.POST.get("email")
-        # from datetime import date
-        # today = date.today()
-        # d1 = today.strftime("%d_%m_%Y")
-        # # print(name, address, phoneNo, mode, presc_req)
-        # if mode=="manual":
-        #     if (presc_req):
-        #         cart = dict(database.child("Users").child(request.session["uid"]).child("Cart").child().get().val())
-        #         print(cart)
-        #         data = {"Address":address, "Name":name, "FileLink": "None","Payment": "COD", "Status": "Not Verified", "Phone": phoneNo, "Scan": 0, "Total": total, "Email": email, "Date": d1}
-        #         database.child("Users").child(request.session["uid"]).child("Orders").child("details").push(data)
-        #     else:
-        #         data = {"Address":address, "Name":name, "Payment": "COD", "Status": "Not Verified", "Phone": phoneNo, "Scan": 0, "Total": total, "FileLink": "None", "Email":email, "Date": d1}
-        #         x = database.child("Users").child(request.session["uid"]).child("Orders").push(data)
-        #         print(x)
-                
-        #         dict1 = {"data": "x", "data2": ["1", "2", "3"], "data3": 5}
-        #         pdf = render_to_pdf('invoice.html', dict1)
-        #         ref = storage.child("Invoice").child(request.session["uid"]+"_"+x["name"]).put("prescription.pdf")
-
-        #         invoicelink = storage.child("Invoice").child(request.session["uid"]+"_"+x["name"]).get_url(None)
-        #         data = {"InvoiceLink" : invoicelink, "UID":request.session["uid"]}
-        #         database.child("AdminV").child("Veri").child(x["name"]).set(data)
-        # else:
-        #     presc_link = request.POST.get("presc_link")
-        

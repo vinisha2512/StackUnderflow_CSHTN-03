@@ -12,9 +12,21 @@
       integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="pastOrders.css" />
+    <link rel="stylesheet" href="{%static 'css/pastOrders.css'%}" />
     <title>MediStop</title>
   </head>
+  <style>
+    div.dropdown-multicol {
+      width: 30em;
+    }
+    div.dropdown-row > a.dropdown-item {
+      display: inline-block;
+      width: 20%;
+    }
+    .navbar-nav .dropdown-menu {
+      width: 754px;
+    }
+  </style>
 
   <body>
     <!--------NAVBAR STARTS--------->
@@ -36,302 +48,90 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
+            <li class="nav-item dropdown">
               <a
-                class="nav-link active"
-                aria-current="page"
+                class="nav-link dropdown-toggle"
                 href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
                 style="color: cyan; font-weight: 600"
-                >MEDICINES</a
               >
+                MEDICINES
+              </a>
+              <div
+                class="dropdown-menu dropdown-multicol"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">DERMA</a>
+                  <a class="dropdown-item" href="#">RESPIRATORY</a>
+                  <a class="dropdown-item ps-5" href="#">ANTI INFECTIVES</a>
+                </div>
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">UROLOGY</a>
+                  <a class="dropdown-item" href="#">ANTI DIABETIC</a>
+
+                  <a class="dropdown-item ps-5" href="#"
+                    >VITAMINS MINERALS NUTRIENTS</a
+                  >
+                </div>
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">CARDIAC</a>
+                  <a class="dropdown-item" href="#">STOMATOLOGICALS</a>
+                  <a class="dropdown-item ps-5" href="#">GASTRO INTESTINAL</a>
+                </div>
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">HORMONES</a>
+                  <a class="dropdown-item" href="#">BLOOD RELATED</a>
+                  <a class="dropdown-item ps-5" href="#">OPHTHAL OTOLOGICALS</a>
+                </div>
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">OTOLOGICALS</a>
+                  <a class="dropdown-item" href="#">PAIN ANALGESICS</a>
+                  <a class="dropdown-item ps-5" href="#">ANTI MALARIALS</a>
+                </div>
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">VACCINES</a>
+                  <a class="dropdown-item" href="#">NEURO CNS</a>
+                  <a class="dropdown-item ps-5" href="#">ANTI NEOPLASTICS</a>
+                </div>
+                <div class="dropdown-row">
+                  <a class="dropdown-item" href="#">OPHTHAL</a>
+                  <a class="dropdown-item" href="#">GYNAECOLOGICAL</a>
+                  <a class="dropdown-item ps-5" href="#"
+                    >SEX STIMULANTS REJUVENATORS</a
+                  >
+                </div>
+              </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" style="font-weight: 600">UPLOAD</a>
-            </li>
-            <!-- <li class="nav-item">
-            <a class="nav-link" href="#" style="font-weight: 600"
-              >LAB TESTS</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" style="font-weight: 600"
-              >LAB TESTS</a
-            >
-          </li> -->
+            <form class="d-flex w-100">
+              <div class="autocomplete" style="width: 500px">
+                <input
+                  class="form-control me-2"
+                  type="text"
+                  placeholder="Search..."
+                  aria-label="Search"
+                  id="nav_search"
+                  style="width: 500px"
+                />
+                <input type="hidden" name="meds" id="meds" value="{{meds}}" />
+              </div>
+              <button class="btn btn-outline-success ms-2" type="submit">
+                Search
+              </button>
+            </form>
           </ul>
           <div class="d-flex me-5">
             <button
-              class="btn text-light"
-              type="btn"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
+              class="btn me-3"
+              style="background-color: black; color: cyan; font-weight: 600"
             >
-              Login
+              Upload
             </button>
-            <!-- Login Modal -->
-            <div
-              class="modal fade"
-              id="exampleModal"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                  <div class="card" style="width: 100%">
-                    <div class="row g-0">
-                      <div class="col-md-6">
-                        <div class="leftdiv">
-                          <img
-                            src="login-01.svg"
-                            class="img-fluid rounded-start"
-                            alt="..."
-                          />
-                        </div>
-                      </div>
-                      <div class="col-md-6" id="col-login">
-                        <div class="card-body">
-                          <h1 class="card-title">Login</h1>
-                          <form action="#" id="loginform">
-                            <div class="form-floating mb-3">
-                              <input
-                                type="email"
-                                class="form-control shadow-none"
-                                id="LfloatingInput"
-                                placeholder="name@example.com"
-                                required
-                              />
-                              <label for="LfloatingInput" id="Llabelemail"
-                                >Enter Email Id
-                              </label>
-                            </div>
-                            <div class="form-floating">
-                              <input
-                                type="password"
-                                class="form-control shadow-none"
-                                id="LfloatingPassword"
-                                placeholder="Password"
-                                required
-                              />
-                              <label for="LfloatingPassword" id="Llabelpassword"
-                                >Password</label
-                              >
-                            </div>
-                            <p
-                              onclick="reset()"
-                              style="float: right; margin-top: 0px"
-                              id="forgot"
-                            >
-                              Forgot Password
-                            </p>
-                            <button type="button" class="btn" id="Lbutton1">
-                              Login
-                            </button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <button class="btn text-light" type="btn">Logout</button>
 
-            <!-- ---- -->
-            <span
-              class="ms-1 mt-1 me-1 text-light"
-              style="display: inline-block"
-              >|</span
-            >
-            <button
-              class="btn text-light"
-              type="submit"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal1"
-            >
-              Signup
-            </button>
-            <!-- Signup Modal -->
-            <div
-              class="modal fade"
-              id="exampleModal1"
-              tabindex="-1"
-              aria-labelledby="exampleModalLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                  <!-- <div class="modal-body">
-                  ...
-                </div> -->
-                  <div class="card" style="width: 100%">
-                    <div class="row g-0">
-                      <div class="col-md-6">
-                        <div class="leftdiv">
-                          <img
-                            src="Signup-01.svg"
-                            class="img-fluid rounded-start"
-                            alt="..."
-                          />
-                        </div>
-                      </div>
-                      <div class="col-md-6" id="col-login">
-                        <div class="card-body">
-                          <h1 class="card-title">Signup</h1>
-                          <form action="#" id="loginform">
-                            <div class="first" id="1">
-                              <div class="form-floating mb-3">
-                                <input
-                                  type="text"
-                                  class="form-control shadow-none"
-                                  id="floatingInputName"
-                                  placeholder="Rahul Sharma"
-                                  required
-                                />
-                                <label for="floatingInputName" id="labelname"
-                                  >Enter Name</label
-                                >
-                              </div>
-                              <div class="form-floating mb-3">
-                                <input
-                                  type="email"
-                                  class="form-control shadow-none"
-                                  id="floatingInput"
-                                  placeholder="name@example.com"
-                                  onkeyup="echeck();"
-                                  required
-                                />
-                                <label for="floatingInput" id="labelemail"
-                                  >Enter Email Id
-                                </label>
-                                <span id="emmessage"></span>
-                              </div>
-                              <div class="row">
-                                <div class="col">
-                                  <div class="form-floating">
-                                    <input
-                                      type="password"
-                                      class="form-control shadow-none"
-                                      id="floatingPassword"
-                                      placeholder="Password"
-                                      onkeyup="passcheck();"
-                                      required
-                                    />
-                                    <label
-                                      for="floatingPassword"
-                                      id="labelpassword"
-                                      >Set Password</label
-                                    >
-                                    <span id="passmessage"></span>
-                                  </div>
-                                </div>
-                                <div class="col">
-                                  <div class="form-floating">
-                                    <input
-                                      type="password"
-                                      class="form-control shadow-none"
-                                      id="floatingCPassword"
-                                      placeholder="Confirm Password"
-                                      onkeyup="check();"
-                                      required
-                                    />
-                                    <label
-                                      for="floatingCPassword"
-                                      id="labelcpassword"
-                                      >Confirm Password</label
-                                    >
-                                    <span id="message"></span>
-                                  </div>
-                                </div>
-                              </div>
-                              <button
-                                type="button"
-                                class="btn"
-                                onclick="enablephone();"
-                                id="buttonNext"
-                                disabled
-                              >
-                                Next
-                              </button>
-                            </div>
-                            <div class="second" id="2">
-                              <div>
-                                <p>
-                                  1. Make sure all the details on the previous
-                                  page are filled.<br />
-                                  2. OTP will be sent to your provided Mobile
-                                  Number.<br />
-                                  3. Enter the OTP to Complete Your Verification
-                                  process.
-                                </p>
-                              </div>
-                              <div class="form-floating mb-3">
-                                <input
-                                  type="tel"
-                                  class="form-control shadow-none"
-                                  id="floatingPhone"
-                                  placeholder="9925159827"
-                                  pattern="[789][0-9]{9}"
-                                  max-length="10"
-                                  min-length="10"
-                                  onkeyup="pcheck();"
-                                  required
-                                />
-                                <label for="floatingPhone" id="labelno"
-                                  >Enter Phone Number</label
-                                >
-                                <span id="pmessage"></span>
-                              </div>
-                              <div class="form-floating mb-3">
-                                <input
-                                  type="number"
-                                  class="form-control shadow-none"
-                                  id="floatingOTP"
-                                  placeholder="456273"
-                                  pattern="[0-9]{6}"
-                                  max-length="6"
-                                  min-length="6"
-                                  onkeyup="otpcheck();"
-                                  required
-                                />
-                                <label for="floatingOTP" id="labelotp"
-                                  >OTP</label
-                                >
-                                <span id="otpmessage"></span>
-                              </div>
-                              <button
-                                type="button"
-                                class="btn"
-                                onclick="prev();"
-                                id="buttonPrev"
-                              >
-                                Previous
-                              </button>
-                              <button
-                                type="button"
-                                class="btn"
-                                onclick="sendOTP();"
-                                id="buttonOTP"
-                              >
-                                Send OTP
-                              </button>
-                              <button
-                                type="button"
-                                class="btn"
-                                id="button1"
-                                disabled
-                              >
-                                SignUp
-                              </button>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- ---------- -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"
@@ -350,110 +150,87 @@
       </div>
     </nav>
 
+    {% for i,j in data2%}
     <div class="row mt-5">
       <div class="col-md-6">
         <h2 class="list-title">Current Order</h2>
       </div>
       <div class="col-md-6">
-        <button class="btn float-end me-3">Details</button>
+        <a href="{% url 'shipmentstatus' ORDERID=i %}"><button class="btn float-end me-3">Details</button></a>
       </div>
     </div>
+    
     <div
       class="card bg-light border-bottom border-top border-4 pb-4 pt-2"
       id="list1"
     >
       <div class="row">
+        {%for medname,p,selltype in j%}
         <div class="col-md-3 py-2">
           <div class="card">
-            <img src="" class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
+              <h6>{{medname}}</h6>
+              <p class="card-text">{{selltype}}</p>
             </div>
             <div class="card-footer">
-              <h5>MRP: ₹498</h5>
+              <h5>MRP: ₹{{p}}</h5>
             </div>
           </div>
         </div>
-        <div class="col-md-3 py-2">
-          <div class="card">
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 py-2">
-          <div class="card">
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 py-2">
-          <div class="card">
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 py-2">
-          <div class="card">
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 py-2">
-          <div class="card">
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
-              <p class="card-text">Bottle of 60 capsules</p>
-            </div>
-            <div class="card-footer">
-              <h5>MRP: ₹498</h5>
-            </div>
-          </div>
-        </div>
+        {%endfor%}
       </div>
     </div>
+    {%endfor%}
 
+
+    {% for i,j in data1%}
     <div class="row mt-5">
+      <div class="col-md-6">
+        <h2 class="list-title">Past Order</h2>
+      </div>
+      <div class="col-md-6">
+        <a href="{{i}}"><button class="btn float-end me-3">Invoice</button></a>
+      </div>
+    </div>
+    
+    <div
+      class="card bg-light border-bottom border-top border-4 pb-4 pt-2"
+      id="list1"
+    >
+      <div class="row">
+        {%for medname,p,selltype in j%}
+        <div class="col-md-3 py-2">
+          <div class="card">
+            <div class="card-body">
+              <h6>{{medname}}</h6>
+              <p class="card-text">{{selltype}}</p>
+            </div>
+            <div class="card-footer">
+              <h5>MRP: ₹{{p}}</h5>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </div>
+    {%endfor%}
+
+
+    <!-- <div class="row mt-5">
       <div class="col-md-6">
         <h2 class="list-title">Past Order</h2>
       </div>
       <div class="col-md-6">
         <button class="btn float-end me-3">Invoice</button>
       </div>
-    </div>
-    <div
+    </div> -->
+    <!-- <div
       class="card bg-light border-bottom border-top border-4 pb-4 pt-2"
       id="list1"
     >
       <div class="row">
         <div class="col-md-3 py-2">
           <div class="card">
-            <img src="" class="card-img-top" alt="..." />
             <div class="card-body">
               <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
               <p class="card-text">Bottle of 60 capsules</p>
@@ -465,7 +242,6 @@
         </div>
         <div class="col-md-3 py-2">
           <div class="card">
-            <img src="" class="card-img-top" alt="..." />
             <div class="card-body">
               <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
               <p class="card-text">Bottle of 60 capsules</p>
@@ -477,7 +253,6 @@
         </div>
         <div class="col-md-3 py-2">
           <div class="card">
-            <img src="" class="card-img-top" alt="..." />
             <div class="card-body">
               <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
               <p class="card-text">Bottle of 60 capsules</p>
@@ -489,7 +264,6 @@
         </div>
         <div class="col-md-3 py-2">
           <div class="card">
-            <img src="" class="card-img-top" alt="..." />
             <div class="card-body">
               <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
               <p class="card-text">Bottle of 60 capsules</p>
@@ -501,7 +275,6 @@
         </div>
         <div class="col-md-3 py-2">
           <div class="card">
-            <img src="" class="card-img-top" alt="..." />
             <div class="card-body">
               <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
               <p class="card-text">Bottle of 60 capsules</p>
@@ -513,9 +286,8 @@
         </div>
         <div class="col-md-3 py-2">
           <div class="card">
-            <img src="" class="card-img-top" alt="..." />
             <div class="card-body">
-              <h6>1mg Multivitamin Supreme Immunity Booster Zinc...</h6>
+              <h6>Clobetamil G Cream</h6>
               <p class="card-text">Bottle of 60 capsules</p>
             </div>
             <div class="card-footer">
@@ -524,7 +296,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!--------FOOTERRR--------->
     <footer class="text-center text-lg-start bg-light text-muted bg-dark mt-4">

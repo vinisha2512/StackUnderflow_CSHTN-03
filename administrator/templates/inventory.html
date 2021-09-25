@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+
+  <title>Inventory</title>
+  <style>
+    .navbar-nav .nav-item:hover .nav-link {
+      color: cyan;
+    }
+
+    .bi-cart2 {
+      cursor: pointer;
+    }
+
+    .bi-pencil-square,
+    .bi-trash-fill {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <!--------NAVBAR STARTS--------->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+    <div class="container-fluid ms-5">
+      <a class="navbar-brand fw-bold me-5" href="#">
+        <img src="Logo1.png" alt="" style="height: 35px; width: 102px" />
+      </a>
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#" style="color: cyan; font-weight: 600">MEDICINES</a>
+          </li>
+        </ul> -->
+        <!-- <form class="d-flex me-5">
+          <button class="btn text-light" type="submit">Login</button>
+          <span class="ms-1 mt-1 me-1 text-light" style="display: inline-block">|</span>
+          <button class="btn text-light" type="submit">Signup</button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+            class="bi bi-cart2 mt-1 ms-3" viewBox="0 0 16 16" style="color: white">
+            <path
+              d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+          </svg>
+        </form> -->
+      </div>
+    </div>
+  </nav>
+
+  <!--------OUT OF STOCK-------->
+  <div class="container-xxl mt-4">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header text-center fw-bold fs-5">
+            Out of Stocks
+          </div>
+          <div class="card-body">
+            <table class="table" id="my_table_id1" data-url="data/url.json" data-id-field="id"
+              data-editable-emptytext="Default empty text." data-editable-url="/my/editable1/update/path">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Product Name</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Supplier</th>
+                  <th scope="col">Delete</th>
+                  <th scope="col">Edit</th>
+                  <th scope="col">Save</th>
+                </tr>
+              </thead>
+
+              <div class="row mb-3">
+                <div class="col-8">
+                  <div class="input-group">
+                    <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search"
+                      id="navBarSearchForm" />
+                    <button class="btn btn-outline-success" type="submit">
+                      Search
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2"></div>
+                <div class="col-2">
+                  <button class="btn float-end" style="
+                        background-color: black;
+                        color: cyan;
+                        font-weight: 600;
+                      ">
+                    ADD PRODUCT
+                  </button>
+                </div>
+              </div>
+              <form id="incre{{i}}">{% csrf_token %}
+
+                <tbody>
+                  {% for i,name,manu,mrp,unit in data2 %}
+                  <tr id="delrow">
+                    <form method="post" id="incre{{i}}">{% csrf_token %}
+
+                      <th scope="row">{{i}}</th>
+                      <td>{{name}}</td>
+                      <td id="editable1{{i}}" contenteditable="false">{{unit}}</td>
+                      <td>{{mrp}}</td>
+                      <td>{{manu}}</td>
+                      <input type="text" hidden id="{{name}}">
+
+                      <td>
+                        <svg type="submit" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                          class="bi bi-trash-fill ms-3" viewBox="0 0 16 16" onclick="deleteRowTable(this,'{{name}}')">
+                          <path
+                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                        </svg>
+                      </td>
+                      <td>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                          class="bi bi-pencil-square ms-1" viewBox="0 0 16 16"
+                          onclick="editbtn(this,'{{name}}','{{i}}')" id="editButton1">
+                          <path
+                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                          <path fill-rule="evenodd"
+                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                        </svg>
+                      </td>
+                      <td>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                          class="bi bi-check2-circle ms-1" viewBox="0 0 16 16" type="submit" id="saved1{{i}}"
+                          style="color: grey" onclick="saved1(this,'{{name}}','{{i}}')" disabled>
+                          <path
+                            d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
+                          <path
+                            d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" />
+                        </svg>
+                      </td>
+                    </form>
+                  </tr>
+                  {%endfor%}
+                </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--------TABLE 2-------->
+  <div class="container-xxl my-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header text-center fw-bold fs-5">Data Tables</div>
+          <div class="card-body">
+            <table class="table" id="my_table_id" data-url="data/url.json" data-id-field="id"
+              data-editable-emptytext="Default empty text." data-editable-url="/my/editable/update/path">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Product Name</th>
+                  <th scope="col" data-field="quantity" data-sortable="true">
+                    Quantity
+                  </th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Supplier</th>
+                  <th scope="col">Delete</th>
+                  <th scope="col">Edit</th>
+                  <th scope="col">Save</th>
+                </tr>
+              </thead>
+
+              <div class="row mb-3">
+                <div class="col-8">
+                  <div class="input-group">
+                    <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search"
+                      id="navBarSearchForm" />
+                    <button class="btn btn-outline-success" type="submit">
+                      Search
+                    </button>
+                  </div>
+                </div>
+                <div class="col-2"></div>
+                <div class="col-2">
+                  <button class="btn float-end" style="
+                        background-color: black;
+                        color: cyan;
+                        font-weight: 600;
+                      ">
+                    ADD PRODUCT
+                  </button>
+                </div>
+              </div>
+
+              <tbody>
+                {% for i,name,manu,mrp,unit in data %}
+                <tr id="delrow">
+                  <th scope="row">{{i}}</th>
+                  <td> {{name}}</td>
+                  <td id="editable{{i}}" contenteditable="false">{{unit}}</td>
+                  <td>{{mrp}}</td>
+                  <td>{{manu}}</td>
+                  <td>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                      class="bi bi-trash-fill ms-3" viewBox="0 0 16 16" onclick="deleteRows(this,'{{name}}')">
+                      <path
+                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                    </svg>
+                  </td>
+                  <td>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                      class="bi bi-pencil-square ms-1" viewBox="0 0 16 16" onclick="editbtn2(this,'{{name}}','{{i}}')"
+                      id="editButton{{i}}">
+                      <path
+                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                      <path fill-rule="evenodd"
+                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg>
+                  </td>
+                  <td>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                      class="bi bi-check2-circle ms-1" viewBox="0 0 16 16" id="saved{{i}}" style="color: grey"
+                      onclick="saved(this,'{{name}}','{{i}}')" disabled>
+                      <path
+                        d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
+                      <path
+                        d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" />
+                    </svg>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--------FOOTERRR--------->
+  <footer class="text-center text-lg-start bg-light text-muted bg-dark">
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05)">
+      © 2021 Copyright:
+      <a class="text-reset fw-bold text-decoration-none" href="#">MediStop.com</a>
+    </div>
+  </footer>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <script>
+    // EDIT TABLE 1
+    $("#editable1").click(function () { });
+
+    function editbtn(e, medname, i) {
+      document.getElementById('editable1' + i).focus();
+      var edit = document.getElementById("editable1" + i);
+      edit.setAttribute("contenteditable", "true");
+      edit.style.outline = "solid black";
+
+      $(document).keypress(function (event) {
+        if (event.which == "13") {
+          event.preventDefault();
+        }
+      });
+
+      var saved1 = document.getElementById("saved1" + i);
+      saved1.disabled = false;
+      saved1.style.color = "red";
+      saved1.style.cursor = "pointer";
+
+
+    }
+
+
+
+    // SAVE TABLE 1
+    function saved1(e, medname, i) {
+      var edit = document.getElementById("editable1" + i);
+      edit.setAttribute("contenteditable", "false");
+
+      edit.style.outline = "none";
+      console.log(medname);
+      var qty = edit.textContent;
+      console.log(qty)
+      var m = document.getElementById(medname).val
+
+      // url1 = "/update_inventory/"
+      $.ajax({
+        type: 'POST',
+        url: "{%url 'update'%}",
+        data: {
+          name: medname,
+          quantity: qty,
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function () {
+          // console.log(response);
+          // if (response == "no") {
+          //   console.log("Cannot add more, disable the btn and show msg, out of stock");
+          // }
+          alert("Success");
+        }
+      });
+
+
+      console.log(qty);
+      var saved1 = document.getElementById("saved1" + i);
+      saved1.disabled = true;
+      saved1.style.color = "grey";
+      saved1.style.cursor = "default";
+      // console.log("wakeip")
+
+
+    }
+
+
+    // $("#saved1").click(function () {
+    //   var edit = document.getElementById("editable1");
+    //   edit.style.outline = "none";
+    // });
+
+    // DELETE TABLE 1
+    function deleteRowTable(r, medname) {
+      console.log("hello");
+      var i = r.parentNode.parentNode.rowIndex;
+      document.getElementById("my_table_id1").deleteRow(i);
+      $.ajax({
+        type: 'POST',
+        url: "{%url 'dele'%}",
+        data: {
+          name: medname,
+
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function () {
+          // console.log(response);
+          // if (response == "no") {
+          //   console.log("Cannot add more, disable the btn and show msg, out of stock");
+          // }
+          alert("Success");
+        }
+      });
+    }
+
+    // -------------------------------------------------------------------
+    // -------------------------------------------------------------------
+
+    // EDIT TABLE 2
+    $("#editable").click(function () { });
+
+
+
+
+    function editbtn2(e, medname, i) {
+
+      document.getElementById('editable' + i).focus();
+      var edit = document.getElementById("editable" + i);
+      edit.setAttribute("contenteditable", "true");
+      edit.style.outline = "solid black";
+
+      $(document).keypress(function (event) {
+        if (event.which == "13") {
+          event.preventDefault();
+        }
+      });
+
+      var saved1 = document.getElementById("saved" + i);
+      saved1.disabled = false;
+      saved1.style.color = "red";
+      saved1.style.cursor = "pointer";
+
+
+    }
+
+
+    // $("#editButton").click(function () {
+    //   $("#editable").focus();
+    //   var edit = document.getElementById("editable");
+    //   edit.setAttribute("contenteditable", "true");
+    //   edit.style.outline = "solid black";
+
+    //   $(document).keypress(function (event) {
+    //     if (event.which == "13") {
+    //       event.preventDefault();
+    //     }
+    //   });
+
+    //   var saved = document.getElementById("saved");
+    //   saved.disabled = false;
+    //   saved.style.color = "red";
+    //   saved.style.cursor = "pointer";
+    // });
+
+
+
+    // SAVE TABLE 1
+
+    function saved(e, medname, i) {
+      var edit = document.getElementById("editable" + i);
+      edit.setAttribute("contenteditable", "false");
+
+      edit.style.outline = "none";
+      console.log(medname);
+      var qty = edit.textContent;
+      console.log(qty)
+      var m = document.getElementById(medname).val
+
+      // url1 = "/update_inventory/"
+      $.ajax({
+        type: 'POST',
+        url: "{%url 'update'%}",
+        data: {
+          name: medname,
+          quantity: qty,
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function () {
+
+          alert("Success");
+        }
+      });
+      console.log(qty);
+      var saved1 = document.getElementById("saved1" + i);
+      saved1.disabled = true;
+      saved1.style.color = "grey";
+      saved1.style.cursor = "default";
+      // console.log("wakeip")
+    }
+
+    // // SAVE TABLE 2
+    // $("#saved").click(function () {
+    //   var edit = document.getElementById("editable");
+    //   edit.style.outline = "none";
+    // });
+
+    // DELETE TABLE 2
+    // function deleteRows(e,medname) {
+    //   var i = r.parentNode.parentNode.rowIndex;
+    //   document.getElementById("my_table_id").deleteRow(i);
+    //   console.log(medname);
+    //   // AJAX VALA PART
+
+
+    function deleteRows(r, medname) {
+      console.log("hello");
+      var i = r.parentNode.parentNode.rowIndex;
+      document.getElementById("my_table_id").deleteRow(i);
+      $.ajax({
+        type: 'POST',
+        url: "{%url 'dele'%}",
+        data: {
+          name: medname,
+
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function () {
+          // console.log(response);
+          // if (response == "no") {
+          //   console.log("Cannot add more, disable the btn and show msg, out of stock");
+          // }
+          alert("Success");
+        }
+      });
+    }
+
+
+
+
+
+
+  </script>
+
+  <script src="extensions/editable/bootstrap-table-editable.js"></script>
+</body>
+
+</html>

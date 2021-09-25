@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -135,6 +136,11 @@
                       ">
                       Reject
                     </button>
+                    <input type="hidden" name="order_id1" id="order_id" value="{{orderid}}">
+                    <input type="hidden" name="link1" id="link" value="{{plink}}">
+                    <input type="hidden" name="phone1" id="phone" value="{{phone}}">
+                    <input type="hidden" name="name1" id="name" value="{{name}}">
+
                     </form>
                   </td>
                 </tr>

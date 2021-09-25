@@ -7,6 +7,7 @@ load_dotenv('\.env')
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.contrib import auth
 
+from administrator.views import admindash
 # Create your views here.
 # print(os.getenv("apiKey"))
 config = {
@@ -53,6 +54,10 @@ def login(request):
             message = "Invalid ID or Password"
             print("Error email")
             return render(request, "Home.html") #error message dikhana padega
+        if email == "teamtechknights2021@gmail.com":
+            return redirect(admindash)
+
+
         return redirect(homepage)
     return render(request, "Home.html")
 
@@ -169,3 +174,92 @@ def addtocart(request):
     temp=int(dict(database.child("Medicine").child(medname).get().val())["Temp"])
     qty_left=min(qty_left-temp,5)
     return HttpResponse(qty_left)
+
+
+
+
+
+def orderhistory(request):
+    try:
+        uid = request.session["uid"]
+        data = database.child("Users").child(uid).child("Orders").get()
+        orderid=[]
+        com=[]
+        for dets in data.each():
+            OrderId = dets.key()
+            orderid.append(OrderId)
+            data1 = database.child("Users").child(uid).child("Orders").child(OrderId).child("Content").get()
+            medname=[]
+            p=[]
+            selltype=[]
+            for dets1 in data1.each():
+                medname.append(dets1.key())
+                p.append(dets1.val().get("price"))
+                selltype.append(dets1.val().get("sell_type"))
+            print(orderid,medname,p,selltype)
+            combi = zip(medname,p,selltype)
+            com.append(combi)
+            coms=zip(orderid,com)
+
+        pdata = database.child("Users").child(uid).child("Past").get()
+        pid=[]
+        pcom=[]
+        for pdets in pdata.each():
+            pId = pdets.key()
+            
+            pdata1 = database.child("Users").child(uid).child("Past").child(pId).child("Content").get()
+
+            pid.append(database.child("Users").child(uid).child("Past").child(pId).child("Invoice").get().val().get("Url"))
+            medname=[]
+            p=[]
+            selltype=[]
+            for pdets1 in pdata1.each():
+                medname.append(pdets1.key())
+                p.append(pdets1.val().get("price"))
+                selltype.append(pdets1.val().get("sell_type"))
+            print(pid,medname,p,selltype)
+            pcombi = zip(medname,p,selltype)
+            pcom.append(pcombi)
+            pcoms=zip(pid,pcom)
+    except:
+        return render(request,"pastOrders.html")
+
+
+    
+    print(orderid)
+    print(com)
+    return render(request,"pastOrders.html",{"data1":pcoms,"data2":coms})
+
+def shipmentstatus(request,ORDERID):
+    order_id=ORDERID
+    print(order_id)
+    uid = request.session["uid"]
+    data1 = database.child("Users").child(uid).child("Orders").child(order_id).child("Content").get()
+    medname=[]
+    p=[]
+    selltype=[]
+    qty=[]
+    for dets1 in data1.each():
+        medname.append(dets1.key())
+        p.append(dets1.val().get("price"))
+        selltype.append(dets1.val().get("sell_type"))
+        qty.append(dets1.val().get("qty"))
+    print(medname,p,selltype,qty)
+    combi = zip(medname,p,selltype,qty)
+    data2 = database.child("Users").child(uid).child("Orders").child(order_id).child("Details").get()
+    scan = data2.val().get("Scan")
+    total = data2.val().get("Total")
+    # if scan == 2:
+    #     a = 2
+    # if scan>=3:
+    #     b = 3
+    d={
+        "oid": order_id,
+        "scan":scan,
+        "total":total,
+        "combi":combi,
+       
+    }
+    return render(request,"shipmenttracker.html",d)
+
+
