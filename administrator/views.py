@@ -111,7 +111,7 @@ def verify(request):
 
     x = dict(Ud.val())
 
-    # dict1 = {"name": x["Name"], "email": x["Email"], "contact": x["Phone"]}
+    dict1 = {"name": x["Name"], "email": x["Email"], "contact": x["Phone"]}
     pdf = render_to_pdf('invoice.html', dict1)
     # ref = storage.child("Invoice").child(UID+"_"+oid).put("prescription.pdf")
     # downloadurl = storage.child("Invoice").child(UID+"_"+oid).get_url(None)
