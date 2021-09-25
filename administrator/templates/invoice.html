@@ -72,64 +72,21 @@
       <table border="none">
       <tr style="font-size:17px">
         <th style="text-align:left">Tax Invoice/Bill of Supply/Cash Memo</th>
-        <th style="text-align:left; padding-left: 50px">Invoice No. : <br> Date : <br> Order Id: </th>
+        <th style="text-align:left; padding-left: 50px">Invoice No. : <br> Date : <br> Order Id: {{oid}} </th>
       </tr>
       </table>
     </div>
 
-
-  <br>
-  <br>
-  <br>
+      <br> Date : 25_09_2021 <br> Order Id: {{oid}}
     <table style="border: 1px solid black; padding: 10px; font-size: 15px">
       <tr>
-        <td rowspan="2"> <b>Sold by:</b> <br> gibberish pffftttt <br> imma already done <br> *sighssssssss*</td>
-        <td>Patient details <br> Address <br> Contact</td>
+        <td rowspan="2"> <b><img src="{{path}}" style="width:200px; height:200px;"></img> </td>
+        <td>Patient details <br> Name: {{name}} <br> Address: {{address}} <br> Contact: {{contact}}</td>
       </tr>
       <tr>
-        <td>Doctor Name and address</td>
+        <td><b>Sold by:</b> <br> MediStop <br></td>
       </tr>
   </table>
-
-
-  <table style="border: 1px solid black; padding: 10px; font-size: 15px">
-      <tr>
-        <td rowspan="2"> <b>Sold by:</b> <br> gibberish pffftttt <br> imma already done <br> *sighssssssss*</td>
-        <td>Patient details <br> Address <br> Contact</td>
-      </tr>
-      <tr>
-        <td>Doctor Name and address</td>
-      </tr>
-  </table>
-  <table style="border: 1px solid black; padding: 10px; font-size: 15px">
-      <tr>
-        <td rowspan="2"> <b>Sold by:</b> <br> gibberish pffftttt <br> imma already done <br> *sighssssssss*</td>
-        <td>Patient details <br> Address <br> Contact</td>
-      </tr>
-      <tr>
-        <td>Doctor Name and address</td>
-      </tr>
-  </table>
-  <table style="border: 1px solid black; padding: 10px; font-size: 15px">
-      <tr>
-        <td rowspan="2"> <b>Sold by:</b> <br> gibberish pffftttt <br> imma already done <br> *sighssssssss*</td>
-        <td>Patient details <br> Address <br> Contact</td>
-      </tr>
-      <tr>
-        <td>Doctor Name and address</td>
-      </tr>
-  </table>
-  <table style="border: 1px solid black; padding: 10px; font-size: 15px">
-      <tr>
-        <td rowspan="2"> <b>Sold by:</b> <br> gibberish pffftttt <br> imma already done <br> *sighssssssss*</td>
-        <td>Patient details <br> Address <br> Contact</td>
-      </tr>
-      <tr>
-        <td>Doctor Name and address</td>
-      </tr>
-  </table>
-
-
 
 
   <br>
@@ -141,30 +98,26 @@
         <tr style="font-size: 15px">
           <th width="50px">Sr No.</th>
           <th>Product Name</th>
-          <th>Mfr Name</th>
           <th width="50px">Qty</th>
           <th>Pack Size</th>
           <th width="60px">MRP</th>
-          <th width="70px">Total Amount</th>
         </tr>
+        {%for medi, price, qty, sell_type in data%}
         <tr style="font-size: 15px">
           <td>1</td>
-          <td>Trigaine Solution</td>
-          <td>Apple Therapeutics Ltd</td>
-          <td>3</td>
-          <td>60 ml</td>
-          <td>Rs 362</td>
-          <td>Rs 1086</td>
+          <td>{{medi}}</td>
+          <td>{{qty}}</td>
+          <td> {{sell_type}}</td>
+          <td>Rs {{price}}</td>
         </tr>
+        {%endfor%}
       </table>
       <br />
 
       
 
-      <p style="float:right; border: 2px solid black; padding:20px; padding-top:30px"> Total Cost : Rs</span></p>
+      <p style="float:right; border: 2px solid black; padding:20px; padding-top:30px"> Total Cost :Rs. {{total}}</span></p>
     </div>
-    
-    <div id="footer_content" style="font-size: 15px; text-align:right"><img src="C:/Users/adapp/Downloads/Medistop.jpeg" style="height: 100px; width: 175px"/>
     </div>
 
   </body>

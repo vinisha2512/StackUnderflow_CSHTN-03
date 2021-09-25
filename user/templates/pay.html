@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<head>
+    <style>
+        .center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<div class="center">
+
+    <form class="text-center border border-light p-5" action="success" method="POST">
+        {% csrf_token %}
+
+        <p class="h3 mb-3"><i class="fas fa-coffee"></i> PAY!!!</p>
+
+        <input type="name" name="name" id="name" required class="form-control mb-4" placeholder="Name">
+
+        <!-- RAZORPAY INTEGRATION HERE -->
+        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_Okf7EfcPgfwXWw"
+            data-amount="100" data-currency="INR" data-order_id="{{payment.id}}" data-buttontext="Pay with Razorpay"
+            data-name="MediStop" data-description="Pay for your order online!"
+            data-image="https://firebasestorage.googleapis.com/v0/b/medistop-c7db0.appspot.com/o/Logo1.png?alt=media&token=628d0bb8-6ef5-410b-bc2f-286f367ed708" 
+            data-theme.color="#F37254"></script>
+    </form>
+
+</div>
+
+
+</div>
+{% endblock %}
+
+
+
+
+
+<!--<form action="https://www.example.com/payment/success/" method="POST">-->
+<!--<script-->
+<!--    src="https://checkout.razorpay.com/v1/checkout.js"-->
+<!--    data-key="rzp_test_Okf7EfcPgfwXWw"-->
+<!--    data-amount="100"-->
+<!--    data-currency="INR"-->
+<!--    data-order_id="{{payment.id}}"-->
+<!--    data-buttontext="Pay with Razorpay"-->
+<!--    data-name="Professional Cipher"-->
+<!--    data-description="A Wild Sheep Chase is the third novel by Japanese author Haruki Murakami"-->
+<!--    data-image="https://example.com/your_logo.jpg"-->
+<!--    data-prefill.name="Gaurav Kumar"-->
+<!--    data-prefill.email="gaurav.kumar@example.com"-->
+<!--    data-theme.color="#F37254"-->
+<!--&gt;</script>-->
+<!--<input type="hidden" custom="Hidden Element" name="hidden">-->
+<!--</form>-->

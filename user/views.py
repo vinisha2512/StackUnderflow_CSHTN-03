@@ -160,7 +160,7 @@ def addtocart(request):
     medname=request.POST.get('name')
     print(medname)
     number=int(request.POST.get('quantity'))
-    UID= "Rsz5MPwnYhbpNV6D42qorchrvBH3"
+    UID= request.session["uid"]
     # quan_left = int(dict(database.child("Medicine").child(med_name).get().val())["Quantity"])
     noofmeets = int(dict(database.child("Medicine").child(medname).get().val())["Temp"]) + number
     try:
@@ -392,6 +392,24 @@ def shipmentstatus(request,ORDERID):
     }
     return render(request,"shipmenttracker.html",d)
 
+
+
+
+import razorpay
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
+def paygate(request):
+    if request.method == 'POST':
+        amount = request.post.get("Total")
+        order_amount = 100
+        order_currency = 'INR'
+        client = razorpay.Client(auth=('rzp_test_Okf7EfcPgfwXWw', 'lYgGMYbvYAWKM8dHgZU1zC1v'))
+        payment = client.order.create({'order_amount': order_amount, 'order_currency': 'INR', 'payment_capture': '1'})
+        # order_receipt = 'order_rcptid_11'
+        # notes = {'Shipping address': 'Bommanahalli, Bangalore'}
+        # OPTIONALclient.order.create(amount=order_amount, currency=order_currency, receipt=order_receipt, notes=notes)
+    return render(request, 'pay.html')
 
 
 

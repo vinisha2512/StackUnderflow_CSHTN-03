@@ -11,6 +11,9 @@ import pyrebase
 from django.shortcuts import render, redirect
 from dotenv import load_dotenv
 from .utils import render_to_pdf
+import pyqrcode
+import png
+from pyqrcode import QRCode
 
 load_dotenv('\.env')
 # Create your views here.
@@ -111,56 +114,73 @@ def verify(request):
 
     x = dict(Ud.val())
 
-    dict1 = {"name": x["Name"], "email": x["Email"], "contact": x["Phone"]}
+    cont = dict(database.child("Users").child(UID).child("Orders").child(oid).child("Content").get().val())
+    print(cont)
+    medi, price, qty, sell_type = [], [], [], []
+    for k, v in cont.items():
+        medi.append(k)
+        price.append(v["price"])
+        qty.append(v["qty"])
+        sell_type.append(v["sell_type"])
+    combilis3 = zip(medi, price, qty, sell_type)
+    total =x["Total"]
+
+    url = pyqrcode.create(oid)
+    url.png(oid+'.png', scale = 6)
+    path = 'E:\MediStop\medistop\MediStop\StackUnderflow_CSHTN-03\\'+oid+".png"
+    print(path)
+
+    dict1 = {"name": x["Name"], "email": x["Email"], "contact": x["Phone"], "address":x["Address"], "data":combilis3, "total":total[1:], "oid":oid, "path" :path}
     pdf = render_to_pdf('invoice.html', dict1)
-    # ref = storage.child("Invoice").child(UID+"_"+oid).put("prescription.pdf")
-    # downloadurl = storage.child("Invoice").child(UID+"_"+oid).get_url(None)
-    # d = {
-    #     "Name": nam,
-    #     "Phone": pno,
-    #     "UID": UID,
-    #     "PrescriptionLink": pli,
-    # }
-    # e={
+
+    ref = storage.child("Invoice").child(UID+"_"+oid).put("prescription.pdf")
+    downloadurl = storage.child("Invoice").child(UID+"_"+oid).get_url(None)
+    d = {
+        "Name": nam,
+        "Phone": pno,
+        "UID": UID,
+        "PrescriptionLink": pli,
+    }
+    e={
        
-    #     "UID": UID,
-    #     "InvoiceLink": downloadurl,
-    # }
-    # database.child("AdminV").child("PrescVerified").child(oid).set(d)
-    # database.child("AdminV").child("Veri").child(oid).set(e)
+        "UID": UID,
+        "InvoiceLink": downloadurl,
+    }
+    database.child("AdminV").child("PrescVerified").child(oid).set(d)
+    database.child("AdminV").child("Veri").child(oid).set(e)
 
-    # database.child("AdminV").child("UnVeri").child(oid).remove()
-    # scan = {
-    #     "Scan": 1
-    # }
-    # try:
-    #     database.child("Users").child(UID).child(
-    #         "Orders").child(oid).child("Details").update(scan)
-    # except:
-    #     pass
-    # try:
-    #     # html_content = loader.get_template("templates/AdminVeri.html").render()
-    #     # email = EmailMessage("Arey Mori Maiiyan", html_content,
-    #     #                     "eat.project.314@gmail.com",[email1,] )
-    #     # email.content_subtype = "html"
-    #     # # email.attach_file('C:/pro/mysite/invoice.pdf')
-    #     # res = email.send()
-    #     val = "http://127.0.0.1:8000/shipmentstatus"+oid
-    #     ctx = {
-    #     'shipment_id': val
-    #     }
-    #     html_body = render_to_string("mail.html",ctx)
-    #     msg = EmailMultiAlternatives(subject="Verified!", from_email="eat.project.314@gmail.com",
-    #                                  to=[email1, ], body=html_body)
-    #     msg.attach_alternative(html_body, "text/html")
-    #     msg.send()
+    database.child("AdminV").child("UnVeri").child(oid).remove()
+    scan = {
+        "Scan": 1
+    }
+    try:
+        database.child("Users").child(UID).child(
+            "Orders").child(oid).child("Details").update(scan)
+    except:
+        pass
+    try:
+        # html_content = loader.get_template("templates/AdminVeri.html").render()
+        # email = EmailMessage("Arey Mori Maiiyan", html_content,
+        #                     "eat.project.314@gmail.com",[email1,] )
+        # email.content_subtype = "html"
+        # # email.attach_file('C:/pro/mysite/invoice.pdf')
+        # res = email.send()
+        val = "http://127.0.0.1:8000/shipmentstatus"+oid
+        ctx = {
+        'shipment_id': val
+        }
+        html_body = render_to_string("mail.html",ctx)
+        msg = EmailMultiAlternatives(subject="Verified!", from_email="eat.project.314@gmail.com",
+                                     to=[email1, ], body=html_body)
+        msg.attach_alternative(html_body, "text/html")
+        msg.send()
         
-    # except Exception as e:
-    #     print("abcd", e)
+    except Exception as e:
+        print("abcd", e)
 
-    # combilis = VerifyPageData()
-    # combilis1 = combilis[0]
-    # combilis2 = combilis[1]
+    combilis = VerifyPageData()
+    combilis1 = combilis[0]
+    combilis2 = combilis[1]
 
     return render(request, "AdminVeri.html", {"data1": combilis1, "data2": combilis2})
 

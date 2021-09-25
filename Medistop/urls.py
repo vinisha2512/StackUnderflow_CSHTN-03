@@ -46,6 +46,8 @@ urlpatterns = [
     path('signup/', user_views.signup, name='signup'),
     path('reset', user_views.reset, name='reset'),
     path('logout', user_views.logout, name='logout'),
+    path('paygate', user_views.paygate, name='paygate'),
+
     path('upload_prescription', presc_views.upload, name="upload"),
     # path('prescriptionUpload', presc_views.prescriptionUpload, name="prescriptionUpload"),
     path('uploaded_meds', presc_views.read_presc, name='upload_pres'),
