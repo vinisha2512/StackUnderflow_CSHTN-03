@@ -189,12 +189,29 @@
     <script>
       countCards += 1;
     </script>
-    {%endfor%} {%if presc_req%}
-    <form action="prescriptionUpload" enctype="multipart/form-data">
-      <input type="file" name="FileUpload" id="file" onchange=funct() />
-      <button type="submit" class="btn btn-primary">UPLOAD</button>
-    </form>
-    {%endif%}
+    {%endfor%} 
+    
+    {%if presc_req%}
+      <div class="container-xl mb-5">
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-8">
+            <form action="prescriptionUpload" enctype="multipart/form-data">
+              <input
+                type="file"
+                name="FileUpload"
+                id="file"
+                onchange="funct()"
+              />
+              <button type="submit" class="btn btn-primary">UPLOAD</button>
+            </form>
+          </div>
+          <div class="col-2"></div>
+        </div>
+      </div>
+
+      {%endif%}
+
   </div>
   {%else%}
   <div class="container-sm mt-4 mb-4">

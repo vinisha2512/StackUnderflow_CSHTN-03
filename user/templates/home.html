@@ -92,17 +92,19 @@
           <!-- <li class="nav-item">
               <a class="nav-link" href="#" style="font-weight: 600">UPLOAD</a>
             </li> -->
-          <form class="d-flex w-100">
-            <div class="autocomplete" style="width:500px;">
-              <input class="form-control me-2" type="text" placeholder="Search..." aria-label="Search" id="nav_search"
-                style="width: 500px" />
-              <input type="hidden" name="meds" id="meds" value='{{meds}}'>
-            </div>
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-
-          </form>
+            <form class="d-flex w-100" action="{%url 'search' %}" method="post">
+              {%csrf_token%}
+  
+              <div class="autocomplete" style="width:500px;">
+                <input class="form-control me-2" type="text" value="" name="searchone" placeholder="Search..." aria-label="Search" id="nav_search"
+                  style="width: 500px" />
+                <input type="hidden" name="meds" id="meds" value='{{meds}}'>
+              </div>
+              <button  class="btn btn-outline-success" style="margin-left: 8px;" type="submit">
+                Search
+              </button>
+  
+            </form>
         </ul>
         <div class="d-flex me-5">
           <a href="{%url 'upload'%}">

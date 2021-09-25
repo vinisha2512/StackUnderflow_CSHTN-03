@@ -33,6 +33,7 @@ urlpatterns = [
     path("verify", admin_views.verify, name="Verify"),
     path("reject", admin_views.reject, name="reject"),
     path("shipment", admin_views.ShipmentVeri, name="shipment"),
+    path('search/', user_views.search, name='search'),
     path("readqr", admin_views.read_qr, name="read_qr"),
     path("admindashboard", admin_views.admindash, name="admindash"),
     url('update', admin_views.update, name='update'),
@@ -58,5 +59,6 @@ urlpatterns = [
     url(r'^user/del/$',presc_views.delete),
     url(r'^addtocart/$',user_views.addtocart),
     url(r'^', user_views.homepage, name="homepage"),
+    
     #url('nameforurl', user_views.views_function, name='nameforurl'),
 ]

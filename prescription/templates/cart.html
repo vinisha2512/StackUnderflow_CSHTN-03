@@ -90,7 +90,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
     <div class="container-fluid ms-5">
       <a class="navbar-brand fw-bold me-5" href="#">
-        <img src="Logo1.png" alt="" style="height: 35px; width: 102px" />
+        <img src="{%static 'image/Logo1.png' %}" alt="" style="height: 35px; width: 102px" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -191,12 +191,24 @@
       countCards += 1;
     </script>
     {%endfor%} {%if presc_req%}
-    <form action="{%url 'cartpresc'%}" method="post" enctype="multipart/form-data">
-      {%csrf_token%}
-      <input type="file" name="FileUpload" id="file" onchange=funct() />
-      <input type="hidden" id="prescmeds" name="presup" value="{{presc_meds}}">
-      <button type="submit" class="btn btn-primary">UPLOAD</button>
-    </form>
+    <div class="container-xl mb-5">
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+          <form action="prescriptionUpload" enctype="multipart/form-data">
+            <input
+              type="file"
+              name="FileUpload"
+              id="file"
+              onchange="funct()"
+            />
+            <button type="submit" class="btn btn-primary">UPLOAD</button>
+          </form>
+        </div>
+        <div class="col-2"></div>
+      </div>
+    </div>
+
     {%endif%}
   </div>
   {%else%}

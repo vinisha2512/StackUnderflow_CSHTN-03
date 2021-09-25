@@ -97,14 +97,14 @@
               <input class="form-control me-2" type="text" placeholder="Search..." aria-label="Search" id="nav_search"
                 style="width: 500px" />
             </div>
-            <button class="btn btn-outline-success" type="submit">
+            <button class="btn btn-outline-success ms-2" type="submit">
               Search
             </button>
 
           </form>
         </ul>
         <div class="d-flex me-5">
-          <button class="btn" style="background-color: black; color: cyan; font-weight: 600">
+          <button class="btn me-2" style="background-color: black; color: cyan; font-weight: 600">
             Upload
           </button>
           {%if not request.session.loggedin%}
@@ -269,7 +269,9 @@
         <h2 class="list-title">{{class}}</h2>
       </div>
       <div class="col-md-6">
-        <button class="btn float-end" style="width: 80px;">Back</button>
+      <a href="{% url 'homepage' %}">
+        <button class="btn float-end" style="width: 80px;">Back</button></a>
+    
       </div>
     </div>
     <div class="row">

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  {%load static%}
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -55,7 +56,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
       <div class="container-fluid ms-5">
         <a class="navbar-brand fw-bold me-5" href="#">
-          <img src="Logo1.png" alt="" style="height: 35px; width: 102px" />
+          <img src="{%static 'Logo1.png' %}" alt="" style="height: 35px; width: 102px" />
         </a>
         <button
           class="navbar-toggler"
@@ -116,7 +117,7 @@
       >
         <div class="card-body text-center mt-3">
           <img
-            src="inventory_2_white_24dp.svg"
+            src="{%static 'inventory.svg' %}"
             alt=""
             style="width: 50px; margin-bottom: 3px"
           />
