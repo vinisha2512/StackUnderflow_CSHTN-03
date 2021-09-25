@@ -402,8 +402,9 @@ from django.views.decorators.csrf import csrf_exempt
 def paygate(request):
     if request.method == 'POST':
         amount = request.post.get("Total")
-        order_amount = 100
+        order_amount = amount*100
         order_currency = 'INR'
+
         client = razorpay.Client(auth=('rzp_test_Okf7EfcPgfwXWw', 'lYgGMYbvYAWKM8dHgZU1zC1v'))
         payment = client.order.create({'order_amount': order_amount, 'order_currency': 'INR', 'payment_capture': '1'})
         # order_receipt = 'order_rcptid_11'
@@ -413,3 +414,5 @@ def paygate(request):
 
 
 
+def success(request):
+    return render(request, "success.html")

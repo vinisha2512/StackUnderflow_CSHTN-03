@@ -16,7 +16,7 @@
 
 <div class="center">
 
-    <form class="text-center border border-light p-5" action="success" method="POST">
+    <form class="text-center border border-light p-5" action="{%url 'success'%}" method="POST">
         {% csrf_token %}
 
         <p class="h3 mb-3"><i class="fas fa-coffee"></i> PAY!!!</p>
@@ -25,7 +25,7 @@
 
         <!-- RAZORPAY INTEGRATION HERE -->
         <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_Okf7EfcPgfwXWw"
-            data-amount="100" data-currency="INR" data-order_id="{{payment.id}}" data-buttontext="Pay with Razorpay"
+            data-amount="52769" data-currency="INR" data-order_id="{{payment.id}}" data-buttontext="Pay with Razorpay"
             data-name="MediStop" data-description="Pay for your order online!"
             data-image="https://firebasestorage.googleapis.com/v0/b/medistop-c7db0.appspot.com/o/Logo1.png?alt=media&token=628d0bb8-6ef5-410b-bc2f-286f367ed708" 
             data-theme.color="#F37254"></script>

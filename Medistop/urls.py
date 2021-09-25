@@ -47,6 +47,7 @@ urlpatterns = [
     path('reset', user_views.reset, name='reset'),
     path('logout', user_views.logout, name='logout'),
     path('paygate', user_views.paygate, name='paygate'),
+    path("success", user_views.success, name="success"),
 
     path('upload_prescription', presc_views.upload, name="upload"),
     # path('prescriptionUpload', presc_views.prescriptionUpload, name="prescriptionUpload"),
