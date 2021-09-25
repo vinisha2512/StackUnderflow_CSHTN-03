@@ -25,6 +25,10 @@
     .navbar-nav .dropdown-menu {
       width: 754px;
     }
+    a{
+      text-decoration: none;
+      color:black;
+    }
   </style>
 </head>
 
@@ -347,6 +351,12 @@
     crossorigin="anonymous"></script>
   <script src="{%static 'js/ModalFunc.js'%}"></script>
   <script src='{% static "js/autosuggest.js" %}'></script>
+  <script SameSite="None; Secure" src="https://static.landbot.io/landbot-3/landbot-3.0.0.js"></script>
+  <script>
+    var myLandbot = new Landbot.Livechat({
+      configUrl: 'https://chats.landbot.io/v3/H-1003384-6BWQ4MFW449MGMIK/index.json',
+    });
+  </script>
 </body>
 
 </html>
